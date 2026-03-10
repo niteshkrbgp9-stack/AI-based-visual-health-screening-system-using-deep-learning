@@ -1,290 +1,219 @@
-# HealthVision AI - AI-Powered Multi-Disease Health Detection System
-
 <div align="center">
 
-![Project Status](https://img.shields.io/badge/Status-Active-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Flask](https://img.shields.io/badge/Framework-Flask-red)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20.0-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
-![College](https://img.shields.io/badge/College-GECM-blue)
-![Academic](https://img.shields.io/badge/Type-Academic%20Project-purple)
+# 🏥 HealthVision AI
 
-**AI-powered web application for detecting jaundice, skin diseases, and nail disorders from medical images**
+### AI-Powered Multi-Disease Health Detection System
 
-### 🏫 Government Engineering College, Munger
+<a href="https://healthvision-ai-1enh.onrender.com/" target="_blank"><img src="https://img.shields.io/badge/🌐_Live_Demo-HealthVision_AI-0891b2?style=for-the-badge" alt="Live Demo"></a>
+<a href="https://www.python.org/" target="_blank"><img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"></a>
+<a href="https://www.tensorflow.org/" target="_blank"><img src="https://img.shields.io/badge/TensorFlow-2.16.2-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow"></a>
+<a href="https://flask.palletsprojects.com/" target="_blank"><img src="https://img.shields.io/badge/Flask-Backend-000000?style=flat-square&logo=flask&logoColor=white" alt="Flask"></a>
+<a href="https://opencv.org/" target="_blank"><img src="https://img.shields.io/badge/OpenCV-Computer_Vision-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV"></a>
+<a href="https://render.com/" target="_blank"><img src="https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=flat-square&logo=render&logoColor=white" alt="Render"></a>
+
+<br>
+
+> A comprehensive AI-based health screening web application that uses deep learning and computer vision to detect diseases from visual analysis of **eyes**, **face/skin**, and **nails**.
+
 **Department of Computer Science & Engineering (Artificial Intelligence)**
+**Govt. Engineering College, Munger**
+
+<br>
+
+<a href="https://healthvision-ai-1enh.onrender.com/" target="_blank">🌐 Live Demo</a> · <a href="PROJECT_REPORT.md">📄 Project Report</a> · <a href="https://healthvision-ai-1enh.onrender.com/documentation" target="_blank">📖 Documentation</a>
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## 🌐 Live Demo
 
-- [Overview](#overview)
-- [Features](#features)
-- [System Architecture](#system-architecture)
-- [Technology Stack](#technology-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Datasets](#datasets)
-- [Models](#models)
-- [Screenshots](#screenshots)
-- [Deployment](#deployment)
-- [Future Enhancements](#future-enhancements)
-- [Contributors](#contributors)
-- [License](#license)
+**🔗 <a href="https://healthvision-ai-1enh.onrender.com/" target="_blank">https://healthvision-ai-1enh.onrender.com/</a>**
+
+> **⚠️ Important — Render Free Tier Cold Start:**
+> This project is deployed on **Render's free tier**. Free-tier services **spin down after 15 minutes of inactivity** (sleep mode). When you visit the link after a period of inactivity:
+>
+> - The **first request may take 1–3 minutes** while the server wakes up and loads the TensorFlow models into memory.
+> - Subsequent requests will respond normally and quickly.
+> - If the page shows a loading spinner or a timeout error, **please wait and refresh** after a minute.
+> - The app runs in **demo mode** on Render (model files are large and may be skipped on the free tier). For full AI inference with real model predictions, run the project locally.
+>
+> **Tip:** If you plan to demo the app, visit the link a few minutes beforehand so it's warmed up and ready.
 
 ---
 
-## 🎯 Overview
+## 📋 Table of Contents
 
-**HealthVision AI** is a comprehensive healthcare AI system that leverages Deep Learning and Computer Vision to provide preliminary health assessments through medical image analysis. The application integrates three specialized detection modules to identify health conditions that are visible through images.
+- [Live Demo](#-live-demo)
+- [Abstract](#-abstract)
+- [Features](#-features)
+- [Detection Modules](#-detection-modules)
+- [Technologies Used](#-technologies-used)
+- [System Architecture](#-system-architecture)
+- [Project Structure](#-project-structure)
+- [Installation & Setup](#-installation--setup)
+- [Usage Guide](#-usage-guide)
+- [API Endpoints](#-api-endpoints)
+- [Model Training](#-model-training)
+- [Future Scope](#-future-scope)
+- [Team](#-team)
+- [Disclaimer](#-disclaimer)
+- [License](#-license)
 
-### Key Use Cases:
-- **Early Detection**: Preliminary health screening from home
-- **Healthcare Access**: Bridge the gap for rural/remote areas with limited medical resources
-- **Patient Education**: Provide detailed information about detected conditions
-- **Medical Consultation**: Guide users to seek professional medical advice
+---
+
+## 📝 Abstract
+
+**HealthVision AI** is an intelligent health screening web application that leverages deep learning and computer vision techniques to assist in the early detection of diseases through visual analysis. The system provides three detection modules — **Eye/Jaundice Detection**, **Face/Skin Disease Detection**, and **Nail Disease Detection** — each powered by transfer learning models trained on medical image datasets.
+
+The platform offers a user-friendly web interface that supports both image upload and live camera capture, processes images using advanced preprocessing techniques (bilateral filtering, CLAHE contrast normalization, Haar cascade detection), and delivers instant predictions with confidence scores, severity levels, and detailed medical information including causes, symptoms, and doctor recommendations.
+
+**Keywords:** Deep Learning, CNN, Transfer Learning, Medical Image Classification, Flask, TensorFlow, OpenCV, Healthcare AI
 
 ---
 
 ## ✨ Features
 
-### 🔍 Three Detection Modules
+| Feature                       | Description                                                                   |
+| ----------------------------- | ----------------------------------------------------------------------------- |
+| **Three Detection Modules**   | Eye (Jaundice), Face (Skin Diseases), and Nail (Nail Diseases)                |
+| **Deep Learning Models**      | Transfer learning with EfficientNetB0 and MobileNetV2 architectures           |
+| **Multiple Input Methods**    | File upload (PNG, JPG, JPEG, JFIF, BMP, WebP) and live camera capture         |
+| **Advanced Image Processing** | Haar cascade eye detection, bilateral filtering, CLAHE normalization          |
+| **Comprehensive Results**     | Disease prediction with confidence scores, top-3 predictions, severity levels |
+| **Detailed Health Reports**   | Disease descriptions, causes, symptoms, and doctor recommendations            |
+| **Printable Reports**         | Generate and print health assessment reports directly from the browser        |
+| **Demo Mode**                 | Fully functional UI demonstration when models are not loaded                  |
+| **Responsive Design**         | Works across desktop and mobile devices                                       |
+| **Production Ready**          | Configured for deployment on Render with Gunicorn WSGI server                 |
 
-#### 1. **Jaundice Detection**
-- Analyzes eye/sclera images for yellow discoloration
-- Indicates potential liver dysfunction or hemolytic disorders
-- Provides bilirubin level severity assessment
+---
 
-#### 2. **Skin/Face Disease Detection**
-- Classifies 5 common skin conditions:
-  - **Acne** - Clogged pores and inflammation
-  - **Eczema** - Chronic inflammatory skin condition
-  - **Herpes** - Viral infection causing blisters
-  - **Panu** - Fungal infection (Tinea Versicolor)
-  - **Rosacea** - Facial redness with visible blood vessels
+## 🔬 Detection Modules
 
-#### 3. **Nail Disease Detection**
-- Identifies 3 nail health conditions:
-  - **Healthy** - Normal nail appearance
-  - **Onychomycosis** - Fungal nail infection
-  - **Psoriasis** - Autoimmune nail disorder
+### Module 1: Eye / Jaundice Detection
 
-### 📱 User Interface
-- **Image Upload**: Upload images from device storage
-- **Live Camera Capture**: Real-time image capture from webcam
-- **Detailed Results**: Disease name, confidence score, severity level
-- **Medical Information**: Description, causes, symptoms, and recommendations
-- **Responsive Design**: Mobile-friendly interface
+| Aspect                 | Details                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| **Model File**         | `jaundice_model.h5`                                                                   |
+| **Architecture**       | MobileNet-based CNN (Transfer Learning)                                               |
+| **Output**             | Binary — **Jaundice** / **Normal**                                                    |
+| **Preprocessing**      | Bilateral filtering, CLAHE, Haar cascade eye detection, HSV/LAB colorspace analysis   |
+| **Input Size**         | 224 × 224 pixels                                                                      |
+| **Detection Strategy** | Face → Eye ROI (primary) → Direct eye detection (fallback) → Full image (last resort) |
+
+Analyzes the sclera (white part of the eye) for yellow discoloration to detect jaundice. Uses a multi-strategy Haar Cascade pipeline for robust eye localization.
+
+### Module 2: Face / Skin Disease Detection
+
+| Aspect            | Details                                                                    |
+| ----------------- | -------------------------------------------------------------------------- |
+| **Model File**    | `face_model.h5`                                                            |
+| **Architecture**  | EfficientNetB0 (Transfer Learning)                                         |
+| **Classes**       | **Acne**, **Eczema**, **Herpes**, **Panu** (Tinea Versicolor), **Rosacea** |
+| **Preprocessing** | Bilateral filtering, CLAHE, EfficientNet preprocessing                     |
+| **Input Size**    | 224 × 224 pixels                                                           |
+
+Classifies facial skin diseases from photographs with top-3 predictions and confidence scores.
+
+### Module 3: Nail Disease Detection
+
+| Aspect            | Details                                                          |
+| ----------------- | ---------------------------------------------------------------- |
+| **Model File**    | `nail_model.h5`                                                  |
+| **Architecture**  | MobileNetV2 (Transfer Learning)                                  |
+| **Classes**       | **Healthy**, **Onychomycosis** (Fungal Infection), **Psoriasis** |
+| **Preprocessing** | Bilateral filtering, CLAHE, custom normalization                 |
+| **Input Size**    | 224 × 224 pixels                                                 |
+
+Identifies nail health conditions from nail photographs with detailed disease info and recommendations.
+
+### Disease Information Database
+
+The system includes a comprehensive built-in database of **25+ diseases/conditions** with:
+
+- Severity Level (Healthy / Mild / Moderate / High)
+- Medical description of the condition
+- Known causes and risk factors
+- Common signs and symptoms
+- Specialist consultation recommendations
+
+---
+
+## 🛠️ Technologies Used
+
+| Category                        | Technology                     |
+| ------------------------------- | ------------------------------ |
+| **Backend**                     | Python 3.11, Flask, Flask-CORS |
+| **Deep Learning**               | TensorFlow 2.16.2, Keras       |
+| **Computer Vision**             | OpenCV (Haar Cascades), Pillow |
+| **Data Processing**             | NumPy, Matplotlib, Seaborn     |
+| **Frontend**                    | HTML5, CSS3, JavaScript (ES6)  |
+| **Camera Integration**          | WebRTC, Canvas API             |
+| **Client-Server Communication** | Fetch API (AJAX)               |
+| **WSGI Server**                 | Gunicorn                       |
+| **Deployment**                  | Render (Cloud Platform)        |
+| **Model Format**                | HDF5 (.h5)                     |
+| **Version Control**             | Git, GitHub                    |
 
 ---
 
 ## 🏗️ System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   Web Interface (HTML/CSS/JS)           │
-│                  (detection.html, index.html)           │
-└────────────────────────┬────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────┐
-│                    Flask Backend (app.py)               │
-│  - Request handling                                     │
-│  - Image preprocessing                                 │
-│  - Model inference coordination                        │
-│  - CORS handling                                        │
-└────────┬──────────────────┬──────────────────┬──────────┘
-         │                  │                  │
-    ┌────▼──────┐      ┌────▼──────┐      ┌───▼──────┐
-    │ TensorFlow│      │ TensorFlow │      │TensorFlow│
-    │  Models   │      │  Models    │      │  Models  │
-    └────┬──────┘      └────┬──────┘      └───┬──────┘
-         │                  │                  │
-    ┌────▼──────┐      ┌────▼──────┐      ┌───▼──────┐
-    │ Jaundice  │      │ Face/Skin  │      │   Nail   │
-    │ Detection │      │ Diseases   │      │ Diseases │
-    │(model.h5) │      │(model.h5)  │      │(model.h5)│
-    └───────────┘      └────────────┘      └──────────┘
-         │ (CNN)             │ (CNN)             │ (CNN)
-         └─────────────────────────────────────┘
-                      │
-           ┌──────────▼──────────┐
-           │ Image Preprocessing │
-           │ - Resize (224x224)  │
-           │ - Normalize         │
-           │ - Color Conversion  │
-           └─────────────────────┘
-                      │
-           ┌──────────▼──────────┐
-           │   OpenCV (Image     │
-           │   Processing)       │
-           └─────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                   Frontend (Browser)                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌────────────┐ │
+│  │ Image Upload │  │ Camera Input │  │  UI/Results │ │
+│  └──────┬──────┘  └──────┬───────┘  └─────▲──────┘ │
+│         │                │                 │         │
+│         └────────┬───────┘                 │         │
+│                  │ (Fetch API / AJAX)       │         │
+└──────────────────┼─────────────────────────┼─────────┘
+                   │                         │
+                   ▼                         │
+┌──────────────────────────────────────────────────────┐
+│                Flask Backend (app.py)                 │
+│                                                      │
+│  ┌──────────────────────────────────────────────┐    │
+│  │           Image Preprocessing                 │    │
+│  │  • Bilateral Filtering (Denoising)            │    │
+│  │  • CLAHE Contrast Normalization               │    │
+│  │  • Haar Cascade Eye/Face Detection            │    │
+│  │  • HSV/LAB Colorspace Analysis                │    │
+│  │  • Resize to 224×224                          │    │
+│  └──────────────────┬───────────────────────────┘    │
+│                     │                                 │
+│  ┌──────────────────▼───────────────────────────┐    │
+│  │           TensorFlow Models                   │    │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────────┐  │    │
+│  │  │ Jaundice │ │   Face   │ │    Nail      │  │    │
+│  │  │  Model   │ │  Model   │ │   Model      │  │    │
+│  │  │  (.h5)   │ │  (.h5)   │ │   (.h5)      │  │    │
+│  │  └──────────┘ └──────────┘ └──────────────┘  │    │
+│  └──────────────────┬───────────────────────────┘    │
+│                     │                                 │
+│  ┌──────────────────▼───────────────────────────┐    │
+│  │        Disease Information Database           │    │
+│  │  • Severity Levels   • Descriptions           │    │
+│  │  • Causes            • Symptoms               │    │
+│  │  • Recommendations                            │    │
+│  └──────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────┘
 ```
 
----
+### Data Flow
 
-## 🛠️ Technology Stack
-
-### Backend
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| Framework | Flask | Latest |
-| Deep Learning | TensorFlow/Keras | 2.20.0 |
-| Computer Vision | OpenCV | Latest |
-| Image Processing | Pillow | Latest |
-| CORS | Flask-CORS | Latest |
-| Server | Gunicorn | Latest |
-| Numerical Computing | NumPy | Latest |
-
-### Frontend
-- **HTML5** - Page structure
-- **CSS3** - Responsive styling
-- **JavaScript (Vanilla)** - Interactive features
-- **Bootstrap** - UI components
-
-### Deployment
-- **Cloud Platform**: Render
-- **Runtime**: Python 3.8+
-- **Configuration**: render.yaml
-
----
-
-## 📦 Installation
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-- Git
-- Virtual Environment (recommended)
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/yourusername/healthvision-ai.git
-cd healthvision-ai
 ```
-
-### Step 2: Create Virtual Environment
-```bash
-# Windows
-python -m venv .venv
-.venv\Scripts\activate
-
-# macOS/Linux
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Verify Installation
-```bash
-python app.py
-```
-
-The application should start on `http://localhost:5000`
-
----
-
-## 🚀 Usage
-
-### Starting the Application
-
-#### Local Development
-```bash
-# Activate virtual environment
-.venv\Scripts\activate  # Windows
-# or
-source .venv/bin/activate  # macOS/Linux
-
-# Run the application
-python app.py
-```
-
-### Using the Web Interface
-
-1. **Open Browser**: Navigate to `http://localhost:5000`
-
-2. **Select Detection Type**:
-   - Click on "Jaundice Detection"
-   - Click on "Skin Disease Detection"
-   - Click on "Nail Disease Detection"
-
-3. **Upload Image or Use Camera**:
-   - **Option A**: Click "Upload Image" and select from device
-   - **Option B**: Click "Use Camera" for real-time capture
-
-4. **View Results**:
-   - Disease classification with confidence score
-   - Severity level assessment
-   - Detailed medical information
-   - Recommendations for action
-
-### API Endpoints
-
-#### Jaundice Detection
-```http
-POST /api/detect_jaundice
-Content-Type: multipart/form-data
-
-Parameters:
-- image: Image file (png, jpg, jpeg, jfif, bmp, webp)
-
-Response:
-{
-  "disease": "Jaundice",
-  "confidence": 0.95,
-  "severity": "moderate",
-  "description": "...",
-  "causes": "...",
-  "symptoms": "...",
-  "recommendation": "..."
-}
-```
-
-#### Skin Disease Detection
-```http
-POST /api/detect_skin_disease
-Content-Type: multipart/form-data
-
-Parameters:
-- image: Image file
-
-Response:
-{
-  "disease": "Acne",
-  "confidence": 0.92,
-  "severity": "mild",
-  "description": "...",
-  "causes": "...",
-  "symptoms": "...",
-  "recommendation": "..."
-}
-```
-
-#### Nail Disease Detection
-```http
-POST /api/detect_nail_disease
-Content-Type: multipart/form-data
-
-Parameters:
-- image: Image file
-
-Response:
-{
-  "disease": "Onychomycosis",
-  "confidence": 0.88,
-  "severity": "moderate",
-  "description": "...",
-  "causes": "...",
-  "symptoms": "...",
-  "recommendation": "..."
-}
+User Image → Upload / Camera Capture
+           → Server receives image bytes
+           → Image Decoding (cv2.imdecode)
+           → Image Enhancement (Bilateral Filter + CLAHE)
+           → Module-specific preprocessing
+           → Model Inference (TensorFlow)
+           → Result Aggregation
+           → JSON Response (prediction, confidence, disease info)
+           → Frontend renders results with severity indicators
 ```
 
 ---
@@ -292,545 +221,326 @@ Response:
 ## 📁 Project Structure
 
 ```
-healthvision-ai/
-├── app.py                          # Main Flask application
-├── requirements.txt                # Python dependencies
-├── render.yaml                     # Render deployment config
-├── .gitignore                      # Git ignore rules
-├── README.md                       # Project documentation
-├── PROJECT_REPORT.md               # Detailed project report
+HealthVision-AI/
 │
-├── face_model.h5                   # Pre-trained face disease model
-├── jaundice_model.h5               # Pre-trained jaundice model
+├── app.py                          # Main Flask application (backend + API)
+├── requirements.txt                # Python dependencies
+├── render.yaml                     # Render cloud deployment configuration
+├── README.md                       # Project documentation (this file)
+├── PROJECT_REPORT.md               # Detailed academic project report
+│
+├── face_model.h5                   # Pre-trained face/skin disease model
+├── jaundice_model.h5               # Pre-trained jaundice detection model
 ├── nail_model.h5                   # Pre-trained nail disease model
 │
 ├── templates/                      # HTML templates
-│   ├── index.html                  # Home page
-│   ├── detect.html                 # Detection interface
-│   ├── documentation.html          # Quick documentation
-│   ├── documentation_detailed.html # Detailed documentation
+│   ├── index.html                  # Landing page (features, about, team)
+│   ├── detect.html                 # Detection interface (upload + camera)
+│   ├── documentation.html          # Documentation page
+│   ├── documentation_detailed.html # Detailed medical/API documentation
 │   └── project_report.html         # Project report page
 │
-├── Face Detection/                 # Face disease detection module
-│   └── Face_dataset.ipynb          # Data processing notebook
+├── Face Dection/                   # Face model training notebook
+│   └── Face_dataset.ipynb
 │
-├── Jaundice Detection/             # Jaundice detection module
-│   └── Jaundice.ipynb              # Model development notebook
+├── Jaundice Dection/               # Jaundice model training notebook
+│   └── Jaundice.ipynb
 │
-├── Nail Detection/                 # Nail disease detection module
-│   └── nail_disease_code.ipynb     # Model development notebook
+├── Nail Dection/                   # Nail model training notebook
+│   └── nail_disease_code.ipynb
 │
-├── Test Data set/                  # Test datasets
-│   ├── ezyZip Data Set/
-│   │   ├── Jaundice/
-│   │   └── Normal/
-│   ├── FaceZip Data Set/
-│   │   └── train/
-│   │       ├── acne/
-│   │       ├── eksim/
-│   │       ├── herpes/
-│   │       ├── panu/
-│   │       └── rosacea/
-│   └── nailZip Data Set/
-│       ├── healthy/
-│       ├── onychomycosis/
-│       └── psoriasis/
+├── Team/                           # Team member profile photos
+│   ├── 01.png                      # Gaurav Kumar
+│   ├── 02.png                      # Nitesh Kumar
+│   ├── 03.png                      # Rupesh Kumar
+│   ├── 04.png                      # Indrajeet Kumar
+│   └── 05.png                      # Dr. Saurabh Suman (Supervisor)
 │
-├── Test Images forEye/             # Eye test images
-│   └── images.jfif
-│
-└── Team/                           # Team documentation
+└── Test Data set/                  # Test datasets
+    ├── ezyZip Data Set/            # Jaundice test images (Jaundice/Normal)
+    ├── FaceZip Data Set/           # Face test images (acne/eksim/herpes/panu/rosacea)
+    └── nailZip Data Set/           # Nail test images (healthy/onychomycosis/psoriasis)
 ```
 
 ---
 
-## 📊 Datasets
+## 🚀 Installation & Setup
 
-### Dataset Overview
+### Prerequisites
 
-| Disease Type | Classes | Total Images | Training | Testing |
-|-------------|---------|------------|----------|---------|
-| **Face/Skin** | 5 | ~2000+ | 70% | 30% |
-| **Jaundice** | 2 | ~500+ | 70% | 30% |
-| **Nail** | 3 | ~600+ | 70% | 30% |
+- Python 3.11.9 or compatible version
+- pip (Python package manager)
+- Git
 
-### Skin Disease Classes
-1. **Acne** - Inflammatory condition with pimples and blackheads
-2. **Eczema** - Chronic dry and itchy skin
-3. **Herpes** - Viral infection with blisters
-4. **Panu** - Fungal infection with hypopigmentation
-5. **Rosacea** - Facial redness with visible blood vessels
+### Steps
 
-### Jaundice Classes
-1. **Jaundiced** - Yellow discoloration of sclera
-2. **Normal** - Healthy eye appearance
+1. **Clone the repository**
 
-### Nail Disease Classes
-1. **Healthy** - Normal nail appearance
-2. **Onychomycosis** - Fungal nail infection
-3. **Psoriasis** - Nail damage due to autoimmune disorder
+   ```bash
+   git clone https://github.com/gauravssah/HealthVision-AI.git
+   cd HealthVision-AI
+   ```
 
----
+2. **Create a virtual environment** (recommended)
 
-## 🤖 Models
+   ```bash
+   python -m venv venv
+   source venv/bin/activate        # Linux/macOS
+   # or
+   venv\Scripts\activate           # Windows
+   ```
 
-### Model Architecture
+3. **Install dependencies**
 
-All models use **Convolutional Neural Networks (CNNs)** for image classification:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-#### Model Specifications
+4. **Run the application**
+
+   ```bash
+   python app.py
+   ```
+
+5. **Open in browser**
+
+   Navigate to `http://localhost:5000`
+
+### Dependencies
+
 ```
-Input Layer:
-├─ Image Size: 224 × 224 pixels
-├─ Color Channels: 3 (RGB)
-└─ Normalization: Applied
-
-Hidden Layers:
-├─ Convolutional Blocks
-├─ ReLU Activation
-├─ Max Pooling
-├─ Batch Normalization
-├─ Dropout (0.5)
-└─ Dense Layers
-
-Output Layer:
-├─ Softmax Activation
-├─ Confidence Scores (0-1)
-└─ Class Probability Distribution
-```
-
-### Training Details
-- **Optimizer**: Adam
-- **Loss Function**: Categorical Crossentropy
-- **Metrics**: Accuracy, Precision, Recall, F1-Score
-- **Batch Size**: 32
-- **Epochs**: 50-100
-- **Validation Split**: 20%
-
-### Model Performance
-
-| Model | Accuracy | Precision | Recall | F1-Score |
-|-------|----------|-----------|--------|----------|
-| Face Disease | 92.5% | 91.8% | 92.3% | 92.0% |
-| Jaundice | 94.2% | 93.9% | 94.5% | 94.2% |
-| Nail Disease | 89.7% | 89.1% | 90.2% | 89.6% |
-
----
-
-## 📸 Screenshots
-
-### Home Page
-- Clean, intuitive interface
-- Three detection module options
-- Quick navigation
-
-### Detection Interface
-- Image upload zone
-- Camera capture button
-- Real-time preview
-
-### Results Page
-- Disease classification
-- Confidence percentage
-- Severity assessment
-- Medical information card
-- Recommendations section
-
----
-
-## 🚀 Deployment
-
-### Deploy on Render
-
-1. **Push to GitHub**:
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-2. **Create Render Account**: Visit https://render.com
-
-3. **Connect GitHub Repository**:
-   - Click "New +" → "Web Service"
-   - Connect your GitHub account
-   - Select the repository
-
-4. **Configure Build Settings**:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-   - **Python Version**: 3.8+
-
-5. **Environment Variables** (if needed):
-   - Set any required environment variables in Render dashboard
-
-6. **Deploy**: Click "Create Web Service"
-
-### Live Demo
-Once deployed, access your application at:
-```
-https://your-app-name.onrender.com
+tensorflow==2.16.2
+flask
+flask-cors
+Pillow
+numpy
+opencv-python-headless
+gunicorn
 ```
 
 ---
 
-## 🔄 Model Inference Flow
+## 📖 Usage Guide
 
-```
-1. User uploads image or captures from camera
-                    ↓
-2. Image validation and preprocessing
-   - Format check
-   - Size verification
-   - RGB conversion if needed
-                    ↓
-3. Image resizing to 224×224 pixels
-                    ↓
-4. Normalization (pixel values 0-1)
-                    ↓
-5. Load appropriate pre-trained model
-   - Based on disease type selected
-   - Use custom objects for compatibility
-                    ↓
-6. Model inference (forward pass)
-   - Get prediction probabilities
-   - Calculate confidence score
-                    ↓
-7. Post-processing
-   - Get class label
-   - Determine severity level
-   - Retrieve disease information
-                    ↓
-8. Format and return JSON response
-   - Disease name
-   - Confidence percentage
-   - Medical details
-   - Recommendations
-                    ↓
-9. Display results in web interface
-```
+### 1. Eye / Jaundice Detection
+
+1. Navigate to the **Detection** page
+2. Select the **Eye/Jaundice** tab
+3. Upload an eye image or capture via camera
+4. Click **Analyze** to get the prediction
+5. View results — jaundice probability, detected eye crop, severity, and health report
+
+### 2. Face / Skin Disease Detection
+
+1. Select the **Face/Skin** tab
+2. Upload a face image or use camera capture
+3. The system analyzes for: **Acne**, **Eczema**, **Herpes**, **Panu** (Tinea Versicolor), and **Rosacea**
+4. View top-3 predictions with confidence scores and detailed disease info
+
+### 3. Nail Disease Detection
+
+1. Select the **Nail** tab
+2. Upload a nail image or use camera capture
+3. The system analyzes for: **Healthy**, **Onychomycosis**, **Psoriasis**, and additional conditions
+4. View detailed disease information, severity, and specialist recommendations
+
+### Supported Image Formats
+
+`PNG` · `JPG` · `JPEG` · `JFIF` · `BMP` · `WebP`
 
 ---
 
-## 📚 Detailed Disease Information
+## 🔌 API Endpoints
 
-### Jaundice
-**Description**: Yellow discoloration of skin and whites of eyes due to elevated bilirubin  
-**Causes**: Liver disease, bile duct obstruction, hemolytic anemia  
-**Symptoms**: Yellow skin/eyes, dark urine, fatigue, abdominal pain  
-**Recommendation**: Consult gastroenterologist, blood tests, liver function assessment  
+| Route                     | Method | Description                                                                     |
+| ------------------------- | ------ | ------------------------------------------------------------------------------- |
+| `/`                       | GET    | Landing page                                                                    |
+| `/detect`                 | GET    | Detection interface                                                             |
+| `/documentation`          | GET    | Documentation page                                                              |
+| `/documentation/detailed` | GET    | Detailed medical & API documentation                                            |
+| `/team/<filename>`        | GET    | Team member profile images                                                      |
+| `/predict/eye`            | POST   | Eye/Jaundice detection — returns prediction, confidence, eye crop, disease info |
+| `/predict/face`           | POST   | Face/Skin disease detection — returns top-3 predictions with disease info       |
+| `/predict/nail`           | POST   | Nail disease detection — returns prediction with disease info                   |
 
-### Acne
-**Description**: Common skin condition with clogged pores and inflammation  
-**Causes**: Excess sebum, bacterial growth, hormonal changes  
-**Symptoms**: Pimples, blackheads, whiteheads, redness  
-**Recommendation**: Gentle cleansing, topical treatments, dermatologist consultation  
+<details>
+<summary><strong>Example API Response (Eye Detection)</strong></summary>
 
-### Eczema
-**Description**: Chronic inflammatory skin disorder causing dryness and itching  
-**Causes**: Genetic factors, immune dysfunction, environmental triggers  
-**Symptoms**: Red, dry, itchy patches, sometimes with weeping  
-**Recommendation**: Regular moisturizing, trigger avoidance, topical corticosteroids  
-
-### Herpes
-**Description**: Viral infection causing painful blisters and sores  
-**Causes**: Herpes Simplex Virus (HSV-1 or HSV-2)  
-**Symptoms**: Painful blisters, tingling, swollen lymph nodes, fever  
-**Recommendation**: Antiviral medications, healthcare provider consultation  
-
-### Panu
-**Description**: Fungal skin infection with discolored patches  
-**Causes**: Malassezia fungus overgrowth in warm, humid conditions  
-**Symptoms**: Light or dark patches, mild itching  
-**Recommendation**: Antifungal creams, keep skin dry, dermatologist follow-up  
-
-### Rosacea
-**Description**: Chronic skin condition with facial redness and visible vessels  
-**Causes**: Genetic factors, vascular instability, environmental triggers  
-**Symptoms**: Facial flushing, visible blood vessels, small red bumps  
-**Recommendation**: Avoid triggers, topical treatments, dermatologist care  
-
-### Onychomycosis
-**Description**: Fungal nail infection causing discoloration and thickness  
-**Causes**: Fungal infection, poor hygiene, nail trauma  
-**Symptoms**: Discolored nails, thickening, crumbling, separation  
-**Recommendation**: Antifungal medications, nail care, patience for regrowth  
-
-### Psoriasis
-**Description**: Autoimmune disorder affecting nail structure and appearance  
-**Causes**: Genetic factors, immune system dysfunction  
-**Symptoms**: Nail pitting, discoloration, thickening, separation  
-**Recommendation**: Topical treatments, systemic therapy, dermatologist coordination  
-
----
-
-## 🔐 Security Features
-
-- **Input Validation**: File type and size verification
-- **CORS Protection**: Configured CORS headers
-- **Error Handling**: Graceful error responses
-- **Secure File Handling**: Temporary file cleanup
-- **Model Security**: Loaded with custom object handling
-
----
-
-## ⚙️ Configuration
-
-### Image Settings
-```python
-ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "jfif", "bmp", "webp"}
-IMG_SIZE = (224, 224)  # Model input size
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+```json
+{
+  "prediction": "Normal",
+  "confidence": 95.2,
+  "eye_crop": "<base64_encoded_image>",
+  "disease_info": {
+    "severity": "healthy",
+    "description": "No signs of jaundice detected.",
+    "causes": "N/A",
+    "symptoms": "No abnormal symptoms detected.",
+    "recommendation": "Continue regular health checkups."
+  }
+}
 ```
 
-### Model Loading
-- All models loaded with TensorFlow 2.20.0
-- Custom DepthwiseConv2D layer handling for compatibility
-- Lazy loading for performance optimization
+</details>
 
 ---
 
-## 🐛 Troubleshooting
+## 🧪 Model Training
 
-### Common Issues and Solutions
+The training notebooks are available in the repository:
 
-| Issue | Solution |
-|-------|----------|
-| ModuleNotFoundError | Run `pip install -r requirements.txt` |
-| Model file not found | Ensure `.h5` files are in project root |
-| Port 5000 already in use | Change port in app.py or kill process |
-| CORS errors | Verify Flask-CORS is installed |
-| Image upload fails | Check file format and size limits |
-| Model slow on startup | First inference is slower, subsequent ones are faster |
+| Module                 | Notebook                  | Directory           |
+| ---------------------- | ------------------------- | ------------------- |
+| Face/Skin Detection    | `Face_dataset.ipynb`      | `Face Dection/`     |
+| Jaundice Detection     | `Jaundice.ipynb`          | `Jaundice Dection/` |
+| Nail Disease Detection | `nail_disease_code.ipynb` | `Nail Dection/`     |
 
----
+### Training Approach
 
-## 🚀 Future Enhancements
-
-1. **Multi-Image Batch Processing**: Process multiple images simultaneously
-2. **Advanced Analytics**: Patient history tracking and trends
-3. **Mobile App**: Native iOS/Android applications
-4. **Real-time Monitoring**: Continuous health metric tracking
-5. **Specialist Integration**: Direct connection to healthcare providers
-6. **Multi-language Support**: Localization for global users
-7. **Advanced Models**: Integration of more disease types
-8. **Confidence Calibration**: Uncertainty estimation
-9. **Explainability**: Grad-CAM visualization for model decisions
-10. **Blockchain Security**: Medical record encryption and storage
+| Aspect                | Details                                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Strategy**          | Transfer Learning — pre-trained models (EfficientNetB0, MobileNetV2) fine-tuned on medical image datasets |
+| **Data Augmentation** | Rotation, flipping, zoom, brightness adjustment to improve generalization                                 |
+| **Optimizer**         | Adam optimizer with learning rate scheduling                                                              |
+| **Loss Functions**    | Categorical cross-entropy (multi-class) · Binary cross-entropy (binary classification)                    |
+| **Input Size**        | 224 × 224 × 3 (RGB)                                                                                       |
 
 ---
 
-## 📈 Performance Metrics
+## 🔮 Future Scope
 
-### Response Times
-- Model Load Time: ~2-3 seconds (first load)
-- Image Processing: ~0.1 seconds
-- Model Inference: ~0.5-1 second
-- Total Response Time: ~1-2 seconds
-
-### System Requirements
-- **RAM**: Minimum 2GB, Recommended 4GB+
-- **Storage**: ~1GB for models and dependencies
-- **CPU**: Modern processor recommended
-- **GPU**: Optional (accelerates inference)
+- **Additional Disease Modules** — Expand to other body parts and disease categories
+- **Model Improvement** — Train on larger, more diverse medical datasets for higher accuracy
+- **Mobile Application** — Develop native Android/iOS applications
+- **Multi-Language Support** — Add support for regional languages
+- **Patient History Tracking** — Allow users to maintain a health screening history
+- **Doctor Integration** — Connect with healthcare professionals for follow-up consultations
+- **Cloud-Based Model Serving** — Use TensorFlow Serving for scalable inference
+- **Real-Time Video Analysis** — Continuous detection from live video feed
 
 ---
 
-## 👥 Contributors & Team
-
-### 📚 Academic Institution
-- **College**: Government Engineering College, Munger
-- **Department**: Computer Science & Engineering (Artificial Intelligence)
-- **Location**: Munger, Bihar, India
-- **Website**: www.gecmunger.ac.in
-
----
-
-### 👨‍🏫 Project Supervisor
+## 👥 Team
 
 <div align="center">
 
-<img src="Team/05.png" alt="Dr. Saurabh Suman" width="120" height="120">
-
-**Dr. Saurabh Suman**  
-🏫 **Assistant Professor**  
-Computer Science & Engineering  
-Government Engineering College, Munger  
-📧 [🔗 LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/)
+> **Department of Computer Science & Engineering (Artificial Intelligence)**
+> **Govt. Engineering College, Munger**
+> **Final Year Minor Project (2025–2026)**
 
 </div>
 
----
-
-### 👨‍💼 Student Developers
+### 🎓 Project Supervisor
 
 <div align="center">
-
-| | | |
-|:---:|:---:|:---:|
-| <img src="Team/01.png" alt="Gaurav Kumar" width="100" height="100"> | <img src="Team/02.png" alt="Nitesh Kumar" width="100" height="100"> | <img src="Team/03.png" alt="Rupesh Kumar" width="100" height="100"> |
-| **Gaurav Kumar**<br/>Reg: 23151144901<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/gauravssah) | **Nitesh Kumar**<br/>Reg: 22151144040<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) | **Rupesh Kumar**<br/>Reg: 22151144010<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/rupeskumar) |
-
-| | |
-|:---:|:---:|
-| <img src="Team/04.png" alt="Indrajeet Kumar" width="100" height="100"> | |
-| **Indrajeet Kumar**<br/>Reg: 23151144906<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) | |
-
+<table>
+  <tr>
+    <td align="center" width="280">
+      <a href="https://www.linkedin.com/in/dr-saurabh-suman-409a4697/" target="_blank">
+        <img src="Team/05.png" width="150" height="150" alt="Dr. Saurabh Suman">
+      </a>
+      <br><br>
+      <strong>Dr. Saurabh Suman</strong>
+      <br>
+      <sub>🏫 Assistant Professor</sub>
+      <br>
+      <sub>Dept. of CSE, Govt. Engineering College, Munger</sub>
+      <br><br>
+      <a href="https://www.linkedin.com/in/dr-saurabh-suman-409a4697/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+    </td>
+  </tr>
+</table>
 </div>
 
----
+### 👨‍💻 Student Developers
 
-### 📋 Team Details
-
-#### 1️⃣ Gaurav Kumar
-- **Registration No**: 23151144901
-- **Branch**: CSE (Artificial Intelligence)
-- **Session**: 2023–2026
-- **Role**: Deep Learning & Model Development
-- **Responsibilities**: CNN model training, transfer learning, model optimization
-
-#### 2️⃣ Nitesh Kumar
-- **Registration No**: 22151144040
-- **Branch**: CSE (Artificial Intelligence)
-- **Session**: 2022–2026
-- **Role**: Backend Development & API Architecture
-- **Responsibilities**: Flask API, database design, server implementation
-
-#### 3️⃣ Rupesh Kumar
-- **Registration No**: 22151144010
-- **Branch**: CSE (Artificial Intelligence)
-- **Session**: 2022–2026
-- **Role**: Frontend Development & UI/UX Design
-- **Responsibilities**: HTML/CSS/JS, responsive UI, user interface
-
-#### 4️⃣ Indrajeet Kumar
-- **Registration No**: 23151144906
-- **Branch**: CSE (Artificial Intelligence)
-- **Session**: 2023–2026
-- **Role**: Computer Vision & Image Processing
-- **Responsibilities**: OpenCV implementation, image preprocessing, detection
-
----
-
-### 🎯 Project Team Structure
-
-```
-HealthVision AI Project
-├── Project Supervisor
-│   └── Dr. Saurabh Suman (Guidance & Medical Accuracy)
-│
-├── Development Team
-│   ├── Gaurav Kumar (Deep Learning & Model Optimization)
-│   ├── Nitesh Kumar (Backend & Flask API)
-│   ├── Rupesh Kumar (Frontend & UI/UX)
-│   └── Indrajeet Kumar (Computer Vision & OpenCV)
-│
-└── Key Responsibilities
-    ├── Model Training & Validation
-    ├── Web Application Development
-    ├── Image Processing & Detection
-    ├── Deployment & Testing
-    └── Documentation & Reporting
-```
-
----
-
-### 📊 Team Contributions Summary
-
-| Member | Role | Key Contributions |
-|--------|------|-------------------|
-| **Dr. Saurabh Suman** | Supervisor | Project guidance, medical accuracy, research direction |
-| **Gaurav Kumar** | ML Engineer | CNN models, transfer learning, model optimization |
-| **Nitesh Kumar** | Backend Dev | Flask API, database design, server architecture |
-| **Rupesh Kumar** | Frontend Dev | HTML/CSS/JS, responsive UI, user interface |
-| **Indrajeet Kumar** | CV Engineer | Image processing, OpenCV implementation, preprocessing |
-
----
-
-### 🏆 Acknowledgments
-
-We extend our gratitude to:
-- **Government Engineering College, Munger** for providing the necessary resources and infrastructure
-- **Department of CSE (AI)** for academic support and guidance
-- **Dr. Saurabh Suman** for consistent mentorship and technical guidance
-- All faculty members who provided feedback and suggestions
-
----
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-### License Terms
-- ✅ Free for commercial use
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ℹ️ Include license and copyright notice
+<div align="center">
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://www.linkedin.com/in/gauravssah" target="_blank">
+        <img src="Team/01.png" width="120" height="120" alt="Gaurav Kumar">
+      </a>
+      <br><br>
+      <strong>Gaurav Kumar</strong>
+      <br>
+      <sub>🤖 CSE (Artificial Intelligence)</sub>
+      <br>
+      <sub>📅 Session: 2023–2026</sub>
+      <br><br>
+      <a href="https://www.linkedin.com/in/gauravssah" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+    </td>
+    <td align="center" width="220">
+      <a href="https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/" target="_blank">
+        <img src="Team/02.png" width="120" height="120" alt="Nitesh Kumar">
+      </a>
+      <br><br>
+      <strong>Nitesh Kumar</strong>
+      <br>
+      <sub>🤖 CSE (Artificial Intelligence)</sub>
+      <br>
+      <sub>📅 Session: 2022–2026</sub>
+      <br><br>
+      <a href="https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+    </td>
+    <td align="center" width="220">
+      <a href="https://www.linkedin.com/in/rupeskumar" target="_blank">
+        <img src="Team/03.png" width="120" height="120" alt="Rupesh Kumar">
+      </a>
+      <br><br>
+      <strong>Rupesh Kumar</strong>
+      <br>
+      <sub>🤖 CSE (Artificial Intelligence)</sub>
+      <br>
+      <sub>📅 Session: 2022–2026</sub>
+      <br><br>
+      <a href="https://www.linkedin.com/in/rupeskumar" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+    </td>
+    <td align="center" width="220">
+      <a href="https://www.linkedin.com/in/indrajeetkumar01/" target="_blank">
+        <img src="Team/04.png" width="120" height="120" alt="Indrajeet Kumar">
+      </a>
+      <br><br>
+      <strong>Indrajeet Kumar</strong>
+      <br>
+      <sub>🤖 CSE (Artificial Intelligence)</sub>
+      <br>
+      <sub>📅 Session: 2023–2026</sub>
+      <br><br>
+      <a href="https://www.linkedin.com/in/indrajeetkumar01/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+    </td>
+  </tr>
+</table>
+</div>
 
 ---
 
 ## ⚠️ Disclaimer
 
-**Important**: This application is designed for **preliminary screening and educational purposes only**. 
-
-**NOT a substitute for:**
-- Professional medical diagnosis
-- Clinical examination
-- Healthcare provider consultation
-- Medical treatment
-
-**Always consult a qualified healthcare professional for:**
-- Accurate diagnosis
-- Treatment recommendations
-- Medical decisions
+> **Medical Disclaimer:** HealthVision AI is an **academic research project** and preliminary screening tool only. It is **NOT** a substitute for professional medical diagnosis, advice, or treatment. Always consult a qualified healthcare provider for any medical concerns. The predictions provided by this system are indicative and should be verified by clinical examination.
 
 ---
 
-## 📞 Support & Contact
+## 📄 License
 
-- **Issues**: Create an issue on GitHub
-- **Questions**: Open a discussion on GitHub
-- **Enhancement Requests**: Feature request on GitHub
-- **Email**: [Your Email]
-
----
-
-## 🙏 Acknowledgments
-
-- TensorFlow/Keras team for excellent deep learning framework
-- Flask developers for robust web framework
-- OpenCV community for computer vision tools
-- Dataset contributors and medical consultants
-- Render for cloud deployment platform
-
----
-
-## 📝 References
-
-1. Esteva, A., Kuprel, B., Novoa, R. A., et al. (2017). Dermatologist-level classification of skin cancer with deep neural networks. Nature, 542(7639), 115-118.
-
-2. Gulshan, V., Peng, L., Coram, M., et al. (2016). Development and validation of a deep learning algorithm for detection of diabetic retinopathy in retinal fundus photographs. JAMA, 316(22), 2402-2410.
-
-3. Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep learning. MIT press.
-
-4. He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. CVPR.
-
-5. Kingma, D. P., & Ba, J. (2014). Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980.
+This project is developed as a final-year **Minor Project** at **Govt. Engineering College, Munger** under the **Department of Computer Science & Engineering (Artificial Intelligence)**.
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for Healthcare Innovation**
+**🏥 HealthVision AI — Empowering Health Through Artificial Intelligence**
 
-⭐ Star this repository if you find it helpful!
+<a href="https://healthvision-ai-1enh.onrender.com/" target="_blank"><img src="https://img.shields.io/badge/🌐_Try_it_Live-HealthVision_AI-0891b2?style=for-the-badge" alt="Live Demo"></a>
 
 </div>
-
----
-
-**Last Updated**: March 2026  
-**Version**: 1.0.0  
-**Status**: Active & Maintained
