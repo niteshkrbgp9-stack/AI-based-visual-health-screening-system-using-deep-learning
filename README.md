@@ -642,28 +642,121 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 - **College**: Government Engineering College, Munger
 - **Department**: Computer Science & Engineering (Artificial Intelligence)
 - **Location**: Munger, Bihar, India
+- **Website**: www.gecmunger.ac.in
+
+---
 
 ### 👨‍🏫 Project Supervisor
-| Name | Position | Department | Contact |
-|------|----------|-----------|---------|
-| **Dr. Saurabh Suman** | Assistant Professor & Project Supervisor | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/) |
 
-### 👨‍💼 Team Members
+| ![Dr. Saurabh Suman](Team/05.png) |
+|:---:|
+| **Dr. Saurabh Suman** |
+| 🏫 **Assistant Professor** |
+| **Department**: Computer Science & Engineering |
+| **College**: Government Engineering College, Munger |
+| **Specialization**: Artificial Intelligence & Machine Learning |
+| [🔗 LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/) |
 
-| # | Name | Registration No. | Branch | LinkedIn |
-|---|------|-----------------|--------|----------|
-| 1 | **Gaurav Kumar** | 23151144901 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/gauravssah) |
-| 2 | **Nitesh Kumar** | 22151144040 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) |
-| 3 | **Rupesh Kumar** | 22151144010 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/rupeskumar) |
-| 4 | **Indrajeet Kumar** | 23151144906 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) |
+---
 
-### 🎯 Team Contributions
+### 👨‍💼 Student Developers
 
-- **Gaurav Kumar**: Deep Learning Model Development & Optimization
-- **Nitesh Kumar**: Backend Development & API Architecture (Flask)
-- **Rupesh Kumar**: Frontend Development & UI/UX Design
-- **Indrajeet Kumar**: Computer Vision & Image Processing (OpenCV)
-- **Dr. Saurabh Suman**: Project Guidance, Medical Accuracy Verification, Research Supervision
+#### 1️⃣ Gaurav Kumar
+
+| ![Gaurav Kumar](Team/01.png) |
+|:---:|
+| **Name**: Gaurav Kumar |
+| **Registration No**: 23151144901 |
+| **Branch**: CSE (Artificial Intelligence) |
+| **Session**: 2023–2026 |
+| **Role**: Deep Learning & Model Development |
+| [🔗 LinkedIn](https://www.linkedin.com/in/gauravssah) |
+
+---
+
+#### 2️⃣ Nitesh Kumar
+
+| ![Nitesh Kumar](Team/02.png) |
+|:---:|
+| **Name**: Nitesh Kumar |
+| **Registration No**: 22151144040 |
+| **Branch**: CSE (Artificial Intelligence) |
+| **Session**: 2022–2026 |
+| **Role**: Backend Development & API Architecture |
+| [🔗 LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) |
+
+---
+
+#### 3️⃣ Rupesh Kumar
+
+| ![Rupesh Kumar](Team/03.png) |
+|:---:|
+| **Name**: Rupesh Kumar |
+| **Registration No**: 22151144010 |
+| **Branch**: CSE (Artificial Intelligence) |
+| **Session**: 2022–2026 |
+| **Role**: Frontend Development & UI/UX Design |
+| [🔗 LinkedIn](https://www.linkedin.com/in/rupeskumar) |
+
+---
+
+#### 4️⃣ Indrajeet Kumar
+
+| ![Indrajeet Kumar](Team/04.png) |
+|:---:|
+| **Name**: Indrajeet Kumar |
+| **Registration No**: 23151144906 |
+| **Branch**: CSE (Artificial Intelligence) |
+| **Session**: 2023–2026 |
+| **Role**: Computer Vision & Image Processing |
+| [🔗 LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) |
+
+---
+
+### 🎯 Project Team Structure
+
+```
+HealthVision AI Project
+├── Project Supervisor
+│   └── Dr. Saurabh Suman (Guidance & Medical Accuracy)
+│
+├── Development Team
+│   ├── Gaurav Kumar (Deep Learning & Model Optimization)
+│   ├── Nitesh Kumar (Backend & Flask API)
+│   ├── Rupesh Kumar (Frontend & UI/UX)
+│   └── Indrajeet Kumar (Computer Vision & OpenCV)
+│
+└── Key Responsibilities
+    ├── Model Training & Validation
+    ├── Web Application Development
+    ├── Image Processing & Detection
+    ├── Deployment & Testing
+    └── Documentation & Reporting
+```
+
+---
+
+### 📊 Team Contributions Summary
+
+| Member | Role | Key Contributions |
+|--------|------|-------------------|
+| **Dr. Saurabh Suman** | Supervisor | Project guidance, medical accuracy, research direction |
+| **Gaurav Kumar** | ML Engineer | CNN models, transfer learning, model optimization |
+| **Nitesh Kumar** | Backend Dev | Flask API, database design, server architecture |
+| **Rupesh Kumar** | Frontend Dev | HTML/CSS/JS, responsive UI, user interface |
+| **Indrajeet Kumar** | CV Engineer | Image processing, OpenCV implementation, preprocessing |
+
+---
+
+### 🏆 Acknowledgments
+
+We extend our gratitude to:
+- **Government Engineering College, Munger** for providing the necessary resources and infrastructure
+- **Department of CSE (AI)** for academic support and guidance
+- **Dr. Saurabh Suman** for consistent mentorship and technical guidance
+- All faculty members who provided feedback and suggestions
+
+---
 
 ---
 
