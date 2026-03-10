@@ -650,7 +650,7 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 <div align="center">
 
-<img src="Team/05.png" alt="Dr. Saurabh Suman" width="120" height="120" style="border-radius: 50%; border: 3px solid #0891b2; margin: 10px 0;">
+<img src="Team/05.png" alt="Dr. Saurabh Suman" width="120" height="120" style="border-radius: 50%; border: 3px solid #0891b2; margin: 10px 0; object-fit: cover; box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);">
 
 **Dr. Saurabh Suman**  
 🏫 **Assistant Professor**  
@@ -668,12 +668,12 @@ Government Engineering College, Munger
 
 | | | |
 |:---:|:---:|:---:|
-| <img src="Team/01.png" alt="Gaurav Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | <img src="Team/02.png" alt="Nitesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | <img src="Team/03.png" alt="Rupesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> |
+| <img src="Team/01.png" alt="Gaurav Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2; object-fit: cover; box-shadow: 0 4px 10px rgba(8, 145, 178, 0.25);"> | <img src="Team/02.png" alt="Nitesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2; object-fit: cover; box-shadow: 0 4px 10px rgba(8, 145, 178, 0.25);"> | <img src="Team/03.png" alt="Rupesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2; object-fit: cover; box-shadow: 0 4px 10px rgba(8, 145, 178, 0.25);"> |
 | **Gaurav Kumar**<br/>Reg: 23151144901<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/gauravssah) | **Nitesh Kumar**<br/>Reg: 22151144040<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) | **Rupesh Kumar**<br/>Reg: 22151144010<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/rupeskumar) |
 
 | | |
 |:---:|:---:|
-| <img src="Team/04.png" alt="Indrajeet Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | |
+| <img src="Team/04.png" alt="Indrajeet Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2; object-fit: cover; box-shadow: 0 4px 10px rgba(8, 145, 178, 0.25);"> | |
 | **Indrajeet Kumar**<br/>Reg: 23151144906<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) | |
 
 </div>
