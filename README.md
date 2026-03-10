@@ -648,68 +648,67 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 ### 👨‍🏫 Project Supervisor
 
-| ![Dr. Saurabh Suman](Team/05.png) |
-|:---:|
-| **Dr. Saurabh Suman** |
-| 🏫 **Assistant Professor** |
-| **Department**: Computer Science & Engineering |
-| **College**: Government Engineering College, Munger |
-| **Specialization**: Artificial Intelligence & Machine Learning |
-| [🔗 LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/) |
+<div align="center">
+
+<img src="Team/05.png" alt="Dr. Saurabh Suman" width="120" height="120" style="border-radius: 50%; border: 3px solid #0891b2; margin: 10px 0;">
+
+**Dr. Saurabh Suman**  
+🏫 **Assistant Professor**  
+Computer Science & Engineering  
+Government Engineering College, Munger  
+📧 [🔗 LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/)
+
+</div>
 
 ---
 
 ### 👨‍💼 Student Developers
 
-#### 1️⃣ Gaurav Kumar
+<div align="center">
 
-| ![Gaurav Kumar](Team/01.png) |
-|:---:|
-| **Name**: Gaurav Kumar |
-| **Registration No**: 23151144901 |
-| **Branch**: CSE (Artificial Intelligence) |
-| **Session**: 2023–2026 |
-| **Role**: Deep Learning & Model Development |
-| [🔗 LinkedIn](https://www.linkedin.com/in/gauravssah) |
+| | | |
+|:---:|:---:|:---:|
+| <img src="Team/01.png" alt="Gaurav Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | <img src="Team/02.png" alt="Nitesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | <img src="Team/03.png" alt="Rupesh Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> |
+| **Gaurav Kumar**<br/>Reg: 23151144901<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/gauravssah) | **Nitesh Kumar**<br/>Reg: 22151144040<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) | **Rupesh Kumar**<br/>Reg: 22151144010<br/>CSE (AI) 2022-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/rupeskumar) |
+
+| | |
+|:---:|:---:|
+| <img src="Team/04.png" alt="Indrajeet Kumar" width="100" height="100" style="border-radius: 50%; border: 2px solid #0891b2;"> | |
+| **Indrajeet Kumar**<br/>Reg: 23151144906<br/>CSE (AI) 2023-26<br/>[🔗 LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) | |
+
+</div>
 
 ---
+
+### 📋 Team Details
+
+#### 1️⃣ Gaurav Kumar
+- **Registration No**: 23151144901
+- **Branch**: CSE (Artificial Intelligence)
+- **Session**: 2023–2026
+- **Role**: Deep Learning & Model Development
+- **Responsibilities**: CNN model training, transfer learning, model optimization
 
 #### 2️⃣ Nitesh Kumar
-
-| ![Nitesh Kumar](Team/02.png) |
-|:---:|
-| **Name**: Nitesh Kumar |
-| **Registration No**: 22151144040 |
-| **Branch**: CSE (Artificial Intelligence) |
-| **Session**: 2022–2026 |
-| **Role**: Backend Development & API Architecture |
-| [🔗 LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) |
-
----
+- **Registration No**: 22151144040
+- **Branch**: CSE (Artificial Intelligence)
+- **Session**: 2022–2026
+- **Role**: Backend Development & API Architecture
+- **Responsibilities**: Flask API, database design, server implementation
 
 #### 3️⃣ Rupesh Kumar
-
-| ![Rupesh Kumar](Team/03.png) |
-|:---:|
-| **Name**: Rupesh Kumar |
-| **Registration No**: 22151144010 |
-| **Branch**: CSE (Artificial Intelligence) |
-| **Session**: 2022–2026 |
-| **Role**: Frontend Development & UI/UX Design |
-| [🔗 LinkedIn](https://www.linkedin.com/in/rupeskumar) |
-
----
+- **Registration No**: 22151144010
+- **Branch**: CSE (Artificial Intelligence)
+- **Session**: 2022–2026
+- **Role**: Frontend Development & UI/UX Design
+- **Responsibilities**: HTML/CSS/JS, responsive UI, user interface
 
 #### 4️⃣ Indrajeet Kumar
-
-| ![Indrajeet Kumar](Team/04.png) |
-|:---:|
-| **Name**: Indrajeet Kumar |
-| **Registration No**: 23151144906 |
-| **Branch**: CSE (Artificial Intelligence) |
-| **Session**: 2023–2026 |
-| **Role**: Computer Vision & Image Processing |
-| [🔗 LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) |
+- **Registration No**: 23151144906
+- **Branch**: CSE (Artificial Intelligence)
+- **Session**: 2023–2026
+- **Role**: Computer Vision & Image Processing
+- **Responsibilities**: OpenCV implementation, image preprocessing, detection
 
 ---
 
