@@ -7,8 +7,13 @@
 ![Flask](https://img.shields.io/badge/Framework-Flask-red)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20.0-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![College](https://img.shields.io/badge/College-GECM-blue)
+![Academic](https://img.shields.io/badge/Type-Academic%20Project-purple)
 
 **AI-powered web application for detecting jaundice, skin diseases, and nail disorders from medical images**
+
+### 🏫 Government Engineering College, Munger
+**Department of Computer Science & Engineering (Artificial Intelligence)**
 
 </div>
 
@@ -631,16 +636,34 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 ---
 
-## 👥 Contributors
+## 👥 Contributors & Team
 
-This project is developed by a dedicated team of AI/ML engineers and healthcare professionals.
+### 📚 Academic Institution
+- **College**: Government Engineering College, Munger
+- **Department**: Computer Science & Engineering (Artificial Intelligence)
+- **Location**: Munger, Bihar, India
 
-### Team Structure
-- **AI/ML Engineers**: Model development and optimization
-- **Backend Developers**: Flask application and API development
-- **Frontend Developers**: Web interface design and implementation
-- **Healthcare Consultants**: Medical accuracy and information verification
-- **Project Manager**: Overall coordination and deployment
+### 👨‍🏫 Project Supervisor
+| Name | Position | Department | Contact |
+|------|----------|-----------|---------|
+| **Dr. Saurabh Suman** | Assistant Professor & Project Supervisor | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/dr-saurabh-suman-409a4697/) |
+
+### 👨‍💼 Team Members
+
+| # | Name | Registration No. | Branch | LinkedIn |
+|---|------|-----------------|--------|----------|
+| 1 | **Gaurav Kumar** | 23151144901 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/gauravssah) |
+| 2 | **Nitesh Kumar** | 22151144040 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/nitesh-kumar-pandey-211136260/) |
+| 3 | **Rupesh Kumar** | 22151144010 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/rupeskumar) |
+| 4 | **Indrajeet Kumar** | 23151144906 | CSE (AI) | [LinkedIn](https://www.linkedin.com/in/indrajeetkumar01/) |
+
+### 🎯 Team Contributions
+
+- **Gaurav Kumar**: Deep Learning Model Development & Optimization
+- **Nitesh Kumar**: Backend Development & API Architecture (Flask)
+- **Rupesh Kumar**: Frontend Development & UI/UX Design
+- **Indrajeet Kumar**: Computer Vision & Image Processing (OpenCV)
+- **Dr. Saurabh Suman**: Project Guidance, Medical Accuracy Verification, Research Supervision
 
 ---
 
