@@ -1,0 +1,73 @@
+# ─── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ─── Virtual Environment ─────────────────────────────────
+venv/
+env/
+.env/
+.venv/
+
+# ─── IDE / Editor ────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Model files (keep .h5 for deployment, ignore others) ─
+# *.h5  ← KEPT for deployment (face_model.h5, jaundice_model.h5, nail_model.h5)
+*.hdf5
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.tflite
+
+# ─── Test datasets (large image folders) ─────────────────
+Test Data set/
+Test Images forrEye/
+
+# ─── Jupyter Notebook checkpoints ────────────────────────
+.ipynb_checkpoints/
+Face Dection/.ipynb_checkpoints/
+Jaundice Dection/.ipynb_checkpoints/
+Nail Dection/.ipynb_checkpoints/
+
+# ─── Debug / test output files ───────────────────────────
+debug_results.txt
+test_result.txt
+test_results.txt
+team_results.txt
+train_jaundice_log.txt
+*.log
+*.tmp
+*.temp
+
+# ─── Environment variables ──────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── OS specific ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.lnk
+
+# ─── Test scripts (not needed for deployment) ────────────
+debug_test.py
+test_eye.py
+test_team.py
+
+# ─── Training script (not needed for deployment) ─────────
+train_models.py
+
+# ─── Logs ─────────────────────────────────────────────────
+*.log

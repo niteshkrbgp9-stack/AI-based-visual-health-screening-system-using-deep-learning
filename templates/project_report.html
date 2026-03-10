@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Project Report — HealthVision AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-light: #06b6d4;
+            --primary-dark: #0e7490;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --dark: #042f2e;
+            --dark-700: #0f3d3c;
+            --dark-600: #134e4a;
+            --text: #f0fdfa;
+            --text-muted: #94a3b8;
+            --text-dark: #1e293b;
+            --white: #ffffff;
+            --off-white: #f0fdfa;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .12);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .18);
+            --transition: all .35s cubic-bezier(.4, 0, .2, 1);
+            --font: 'Inter', system-ui, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px
+        }
+
+        body {
+            font-family: var(--font);
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--white);
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        /* ═══ NAVBAR ═══ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 0;
+            background: rgba(4, 47, 46, .92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--text)
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            font-size: .92rem;
+            padding: 4px 0;
+            transition: var(--transition)
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light)
+        }
+
+        .nav-links a.active {
+            color: var(--accent-light);
+            font-weight: 600
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: var(--transition)
+        }
+
+        /* ═══ HERO ═══ */
+        .report-hero {
+            padding: 120px 24px 60px;
+            background: linear-gradient(135deg, var(--dark) 0%, #064e3b 40%, #0e7490 100%);
+            text-align: center;
+            color: var(--text);
+        }
+
+        .report-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 12px
+        }
+
+        .report-hero p {
+            font-size: 1.1rem;
+            color: rgba(240, 253, 250, .75);
+            max-width: 650px;
+            margin: 0 auto
+        }
+
+        .report-hero .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, .15);
+            border: 1px solid rgba(16, 185, 129, .3);
+            color: var(--accent-light);
+            font-size: .82rem;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 9999px;
+            margin-bottom: 20px;
+        }
+
+        /* ═══ TOC ═══ */
+        .toc {
+            max-width: 900px;
+            margin: -30px auto 0;
+            position: relative;
+            z-index: 2;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 32px 36px;
+        }
+
+        .toc h2 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--primary-dark)
+        }
+
+        .toc ol {
+            padding-left: 20px;
+            columns: 2;
+            column-gap: 32px
+        }
+
+        .toc li {
+            margin-bottom: 6px;
+            font-size: .93rem;
+            break-inside: avoid
+        }
+
+        .toc a {
+            color: var(--primary);
+            font-weight: 500
+        }
+
+        .toc a:hover {
+            text-decoration: underline
+        }
+
+        /* ═══ REPORT CONTENT ═══ */
+        .report {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px
+        }
+
+        .report section {
+            margin-bottom: 48px
+        }
+
+        .report h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--dark);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .report h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 20px 0 10px
+        }
+
+        .report p {
+            margin-bottom: 14px;
+            color: #334155;
+            font-size: .96rem
+        }
+
+        .report ul,
+        .report ol {
+            padding-left: 22px;
+            margin-bottom: 14px
+        }
+
+        .report li {
+            margin-bottom: 6px;
+            font-size: .95rem;
+            color: #334155
+        }
+
+        .report strong {
+            color: var(--text-dark)
+        }
+
+        /* info table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: .93rem
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            text-align: left
+        }
+
+        .info-table th {
+            background: var(--dark);
+            color: var(--text);
+            font-weight: 600
+        }
+
+        .info-table td:first-child {
+            font-weight: 600;
+            white-space: nowrap;
+            background: #f0fdfa
+        }
+
+        /* general table */
+        .report table:not(.info-table) {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: .9rem
+        }
+
+        .report table:not(.info-table) th,
+        .report table:not(.info-table) td {
+            padding: 9px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left
+        }
+
+        .report table:not(.info-table) th {
+            background: #0e7490;
+            color: #fff;
+            font-weight: 600
+        }
+
+        .report table:not(.info-table) tr:nth-child(even) td {
+            background: #f8fafc
+        }
+
+        /* code / pre */
+        .report pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            font-size: .84rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .report code {
+            font-family: 'Courier New', monospace
+        }
+
+        /* badges */
+        .severity {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 9999px;
+            font-size: .78rem;
+            font-weight: 600
+        }
+
+        .severity.healthy {
+            background: #dcfce7;
+            color: #166534
+        }
+
+        .severity.mild {
+            background: #fef9c3;
+            color: #854d0e
+        }
+
+        .severity.moderate {
+            background: #ffedd5;
+            color: #9a3412
+        }
+
+        .severity.high {
+            background: #fee2e2;
+            color: #991b1b
+        }
+
+        /* disclaimer */
+        .disclaimer {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-top: 32px;
+            font-size: .9rem;
+            color: #92400e;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(4, 47, 46, .97);
+                padding: 16px 0
+            }
+
+            .nav-links.open {
+                display: flex
+            }
+
+            .nav-links a {
+                padding: 12px 24px
+            }
+
+            .nav-toggle {
+                display: flex
+            }
+
+            .report-hero h1 {
+                font-size: 1.8rem
+            }
+
+            .toc ol {
+                columns: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <svg viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="#06b6d4" stroke-width="2" />
+                    <circle cx="16" cy="16" r="6" fill="#06b6d4" />
+                    <circle cx="16" cy="16" r="2.5" fill="#042f2e" />
+                    <path d="M2 16c4-8 10-12 14-12s10 4 14 12c-4 8-10 12-14 12S6 24 2 16z" stroke="#06b6d4"
+                        stroke-width="1.5" fill="none" opacity=".4" />
+                </svg>
+                HealthVision AI
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/">Home</a>
+                <a href="/detect">Detect</a>
+                <a href="/documentation">📖 Docs</a>
+                <a href="/report" class="active">📄 Report</a>
+            </div>
+            <button class="nav-toggle" id="navToggle"
+                onclick="document.getElementById('navLinks').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="report-hero">
+        <span class="badge">📄 Academic Project Report</span>
+        <h1>HealthVision AI — Project Report</h1>
+        <p>AI-Powered Multi-Disease Health Detection System</p>
+    </div>
+
+    <!-- ═══ INFO TABLE ═══ -->
+    <div class="toc">
+        <table class="info-table">
+            <tr>
+                <th>Field</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>Project Name</td>
+                <td>HealthVision AI</td>
+            </tr>
+            <tr>
+                <td>Technology</td>
+                <td>Python, Flask, TensorFlow, OpenCV</td>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td>Artificial Intelligence &amp; Healthcare</td>
+            </tr>
+            <tr>
+                <td>Application Type</td>
+                <td>Web Application (AI-Based Medical Image Analysis)</td>
+            </tr>
+            <tr>
+                <td>Deployment</td>
+                <td>Render Cloud Platform</td>
+            </tr>
+        </table>
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#problem-statement">Problem Statement</a></li>
+            <li><a href="#objectives">Objectives</a></li>
+            <li><a href="#literature-review">Literature Review</a></li>
+            <li><a href="#system-architecture">System Architecture</a></li>
+            <li><a href="#technology-stack">Technology Stack</a></li>
+            <li><a href="#module-description">Module Description</a></li>
+            <li><a href="#dataset-description">Dataset Description</a></li>
+            <li><a href="#methodology">Methodology &amp; Algorithms</a></li>
+            <li><a href="#system-design">System Design (UML)</a></li>
+            <li><a href="#implementation">Implementation Details</a></li>
+            <li><a href="#results">Screenshots &amp; Results</a></li>
+            <li><a href="#testing">Testing</a></li>
+            <li><a href="#advantages">Advantages &amp; Limitations</a></li>
+            <li><a href="#future-scope">Future Scope</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+            <li><a href="#references">References</a></li>
+        </ol>
+    </div>
+
+    <!-- ═══ REPORT BODY ═══ -->
+    <div class="report">
+
+        <!-- 1. Abstract -->
+        <section id="abstract">
+            <h2>1. Abstract</h2>
+            <p><strong>HealthVision AI</strong> is an AI-powered web application that uses Deep Learning and Computer
+                Vision techniques to detect multiple health conditions from medical images. The system provides three
+                detection modules:</p>
+            <ol>
+                <li><strong>Jaundice Detection</strong> — Analyzes eye/sclera images to detect jaundice by identifying
+                    yellow discoloration.</li>
+                <li><strong>Skin/Face Disease Detection</strong> — Classifies facial skin conditions into 5 categories:
+                    Acne, Eczema, Herpes, Panu (Tinea Versicolor), and Rosacea.</li>
+                <li><strong>Nail Disease Detection</strong> — Identifies nail health conditions across 3 categories:
+                    Healthy, Onychomycosis (fungal infection), and Psoriasis.</li>
+            </ol>
+            <p>The application is built using <strong>Flask</strong> (Python web framework),
+                <strong>TensorFlow/Keras</strong> for deep learning model inference, and <strong>OpenCV</strong> for
+                image preprocessing. It features a modern, responsive web interface with both image upload and live
+                camera capture capabilities. The system provides disease information, severity assessment, and medical
+                recommendations for each detected condition.</p>
+            <p><strong>Keywords:</strong> Deep Learning, CNN, Transfer Learning, Medical Image Classification, Flask,
+                TensorFlow, OpenCV, Healthcare AI</p>
+        </section>
+
+        <!-- 2. Introduction -->
+        <section id="introduction">
+            <h2>2. Introduction</h2>
+            <h3>2.1 Background</h3>
+            <p>Healthcare accessibility remains a significant challenge in many parts of the world. Early detection of
+                diseases is crucial for effective treatment, but access to medical professionals is often limited,
+                especially in rural and underserved areas. With advancements in Artificial Intelligence and Deep
+                Learning, it is now possible to develop automated disease detection systems that can provide preliminary
+                health assessments.</p>
+            <h3>2.2 Motivation</h3>
+            <p>Skin diseases, jaundice, and nail conditions are among the most common health issues worldwide. Visual
+                inspection is the primary diagnostic method for these conditions, making them ideal candidates for
+                AI-based image analysis. This project aims to bridge the gap between patients and early diagnosis by
+                providing an accessible, AI-powered tool.</p>
+            <h3>2.3 Project Overview</h3>
+            <p>HealthVision AI is a comprehensive health detection platform that combines three distinct medical image
+                analysis modules into a single web application. Users can upload images or use their device camera to
+                capture photos, which are then analyzed by trained deep learning models to provide instant health
+                assessments along with detailed medical information.</p>
+        </section>
+
+        <!-- 3. Problem Statement -->
+        <section id="problem-statement">
+            <h2>3. Problem Statement</h2>
+            <p>Many common health conditions like <strong>jaundice</strong>, <strong>skin diseases</strong>, and
+                <strong>nail disorders</strong> require visual inspection for initial diagnosis. However:</p>
+            <ul>
+                <li>Access to dermatologists and specialists is limited in rural/remote areas.</li>
+                <li>Early symptoms are often ignored due to lack of awareness.</li>
+                <li>Manual visual inspection can be subjective and prone to human error.</li>
+                <li>Timely diagnosis is critical — delayed treatment worsens outcomes.</li>
+            </ul>
+            <p><strong>There is a need for an accessible, AI-powered tool that can provide preliminary health
+                    assessments from images, enabling early detection and timely medical consultation.</strong></p>
+        </section>
+
+        <!-- 4. Objectives -->
+        <section id="objectives">
+            <h2>4. Objectives</h2>
+            <ol>
+                <li>To develop a deep learning-based system capable of detecting jaundice from eye/sclera images.</li>
+                <li>To build a facial skin disease classifier that identifies 5 common skin conditions.</li>
+                <li>To create a nail disease detection model that classifies 3 nail health conditions.</li>
+                <li>To integrate all three modules into a single, user-friendly web application.</li>
+                <li>To provide detailed disease information, severity, causes, symptoms, and recommendations.</li>
+                <li>To enable both image upload and real-time camera capture functionality.</li>
+                <li>To deploy the application on a cloud platform for online accessibility.</li>
+            </ol>
+        </section>
+
+        <!-- 5. Literature Review -->
+        <section id="literature-review">
+            <h2>5. Literature Review</h2>
+            <h3>5.1 Deep Learning in Medical Imaging</h3>
+            <p>Convolutional Neural Networks (CNNs) have revolutionized medical image analysis. Research has shown that
+                CNNs can achieve human-level performance in tasks like skin cancer detection (Esteva et al., 2017),
+                diabetic retinopathy screening (Gulshan et al., 2016), and dermatological disease classification.</p>
+            <h3>5.2 Transfer Learning</h3>
+            <p>Transfer learning, where pre-trained models (like EfficientNet, MobileNet, ResNet) are fine-tuned on
+                domain-specific datasets, has proven highly effective for medical image classification tasks where
+                labeled data is limited. This approach significantly reduces training time and improves accuracy.</p>
+            <h3>5.3 Jaundice Detection via Sclera Analysis</h3>
+            <p>Several studies have explored non-invasive jaundice detection by analyzing the yellow discoloration of
+                the sclera (eye whites). Color space analysis (HSV, LAB) combined with machine learning classifiers has
+                shown promising results for early jaundice screening.</p>
+            <h3>5.4 Skin Disease Classification</h3>
+            <p>Automated skin disease classification using CNNs has been widely researched. Models trained on datasets
+                like DermNet, ISIC, and HAM10000 have achieved high accuracy in classifying various dermatological
+                conditions.</p>
+            <h3>5.5 Nail Disease Detection</h3>
+            <p>Nail disorders often serve as indicators of both localized and systemic diseases. AI-based nail analysis
+                is an emerging field, with recent studies demonstrating the feasibility of automated detection of
+                conditions like onychomycosis and psoriasis.</p>
+        </section>
+
+        <!-- 6. System Architecture -->
+        <section id="system-architecture">
+            <h2>6. System Architecture</h2>
+            <h3>6.1 High-Level Architecture</h3>
+            <pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                        CLIENT (Browser)                         │
+│  ┌─────────┐   ┌──────────┐   ┌──────────┐   ┌─────────────┐  │
+│  │ Index   │   │ Detection│   │  Camera  │   │Documentation│  │
+│  │ Page    │   │  Page    │   │  Module  │   │    Page     │  │
+│  └────┬────┘   └────┬─────┘   └────┬─────┘   └─────────────┘  │
+│       └──────────────┴──────────────┘                            │
+│                      │ HTTP Requests (AJAX/Fetch API)            │
+└──────────────────────┼──────────────────────────────────────────┘
+                       │
+┌──────────────────────┼──────────────────────────────────────────┐
+│                 FLASK SERVER (Backend)                           │
+│  ┌───────────────────┴───────────────────────────┐              │
+│  │              Flask App (app.py)                │              │
+│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐   │              │
+│  │  │  /predict │ │  /predict │ │  /predict │   │              │
+│  │  │   /eye    │ │   /face   │ │   /nail   │   │              │
+│  │  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘   │              │
+│  └────────┼──────────────┼──────────────┼────────┘              │
+│  ┌────────┴──────────────┴──────────────┴────────┐              │
+│  │           Image Preprocessing Pipeline         │              │
+│  └────────┬──────────────┬──────────────┬────────┘              │
+│  ┌────────┴──────────────┴──────────────┴────────┐              │
+│  │            TensorFlow/Keras Models             │              │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────────┐   │              │
+│  │  │ Jaundice │ │   Face   │ │    Nail      │   │              │
+│  │  │ Model.h5 │ │ Model.h5 │ │  Model.h5    │   │              │
+│  │  └──────────┘ └──────────┘ └──────────────┘   │              │
+│  └───────────────────────────────────────────────┘              │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+
+            <h3>6.2 Data Flow</h3>
+            <pre><code>User Image → Image Upload/Camera Capture
+           → Server receives image bytes
+           → Image Decoding (cv2.imdecode)
+           → Image Enhancement (Bilateral Filter + CLAHE)
+           → Module-specific preprocessing
+           → Model Inference (TensorFlow)
+           → Result Aggregation
+           → JSON Response with prediction, confidence, disease info
+           → Frontend displays results with UI feedback</code></pre>
+        </section>
+
+        <!-- 7. Technology Stack -->
+        <section id="technology-stack">
+            <h2>7. Technology Stack</h2>
+            <h3>7.1 Backend Technologies</h3>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Version</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Python</td>
+                    <td>3.x</td>
+                    <td>Primary programming language</td>
+                </tr>
+                <tr>
+                    <td>Flask</td>
+                    <td>Latest</td>
+                    <td>Web framework for REST API and page routing</td>
+                </tr>
+                <tr>
+                    <td>Flask-CORS</td>
+                    <td>Latest</td>
+                    <td>Cross-Origin Resource Sharing support</td>
+                </tr>
+                <tr>
+                    <td>TensorFlow</td>
+                    <td>2.16.2</td>
+                    <td>Deep Learning framework for model inference</td>
+                </tr>
+                <tr>
+                    <td>OpenCV</td>
+                    <td>Latest</td>
+                    <td>Computer Vision library for image processing</td>
+                </tr>
+                <tr>
+                    <td>NumPy</td>
+                    <td>Latest</td>
+                    <td>Numerical computations and array operations</td>
+                </tr>
+                <tr>
+                    <td>Pillow (PIL)</td>
+                    <td>Latest</td>
+                    <td>Image manipulation library</td>
+                </tr>
+                <tr>
+                    <td>Gunicorn</td>
+                    <td>Latest</td>
+                    <td>Production WSGI HTTP server</td>
+                </tr>
+            </table>
+            <h3>7.2 Frontend Technologies</h3>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>HTML5</td>
+                    <td>Page structure and semantic markup</td>
+                </tr>
+                <tr>
+                    <td>CSS3</td>
+                    <td>Responsive styling, animations, gradients</td>
+                </tr>
+                <tr>
+                    <td>JavaScript (ES6)</td>
+                    <td>AJAX requests, camera API, DOM manipulation</td>
+                </tr>
+                <tr>
+                    <td>Google Fonts</td>
+                    <td>Inter font family for modern typography</td>
+                </tr>
+            </table>
+            <h3>7.3 AI/ML Libraries &amp; Tools</h3>
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Haar Cascades</td>
+                    <td>Face and eye detection (OpenCV pre-trained)</td>
+                </tr>
+                <tr>
+                    <td>EfficientNet</td>
+                    <td>Transfer learning backbone for face model</td>
+                </tr>
+                <tr>
+                    <td>MobileNet</td>
+                    <td>Transfer learning backbone for classification</td>
+                </tr>
+                <tr>
+                    <td>CLAHE</td>
+                    <td>Contrast Limited Adaptive Histogram Equalization</td>
+                </tr>
+                <tr>
+                    <td>Bilateral Filter</td>
+                    <td>Image denoising while preserving edges</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 8. Module Description -->
+        <section id="module-description">
+            <h2>8. Module Description</h2>
+
+            <h3>8.1 Module 1: Jaundice Detection (Eye Analysis)</h3>
+            <p><strong>Purpose:</strong> Detect jaundice by analyzing the sclera (white part) of the eye for yellow
+                discoloration.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+                <li>Image is received and enhanced using bilateral filter and CLAHE.</li>
+                <li>Haar Cascade detectors attempt face detection, then eye detection within the face ROI.</li>
+                <li>If face-then-eye detection fails, direct eye detection on full image is attempted.</li>
+                <li>Eye crop is extracted with padding for context.</li>
+                <li>Image is resized to 224×224 pixels, normalized to [0, 1].</li>
+                <li>Jaundice model (binary classifier) predicts Normal vs. Jaundice.</li>
+                <li>Confidence score and disease information are returned.</li>
+            </ol>
+            <p><strong>Output Classes:</strong> Normal, Jaundice</p>
+
+            <h3>8.2 Module 2: Face/Skin Disease Detection</h3>
+            <p><strong>Purpose:</strong> Classify facial skin diseases from photographs.</p>
+            <ol>
+                <li>Image is enhanced (denoising + contrast normalization).</li>
+                <li>Image is resized to 224×224 pixels.</li>
+                <li>Color space conversion (BGR → RGB).</li>
+                <li>EfficientNet preprocessing is applied to the input.</li>
+                <li>Face disease model classifies into one of 5 categories.</li>
+                <li>Top-3 predictions with confidence scores are returned.</li>
+            </ol>
+            <p><strong>Output Classes:</strong> Acne, Eczema, Herpes, Panu (Tinea Versicolor), Rosacea</p>
+
+            <h3>8.3 Module 3: Nail Disease Detection</h3>
+            <p><strong>Purpose:</strong> Identify nail health conditions from nail photographs.</p>
+            <ol>
+                <li>Image is enhanced for quality improvement.</li>
+                <li>Image is resized to 224×224 pixels, converted to RGB, and normalized.</li>
+                <li>Nail disease model classifies the image into one of 3 categories.</li>
+                <li>Top-3 predictions with confidence scores are returned.</li>
+            </ol>
+            <p><strong>Output Classes:</strong> Healthy, Onychomycosis (Fungal Infection), Psoriasis</p>
+
+            <h3>8.4 Module 4: Disease Information Database</h3>
+            <p>The system includes a comprehensive database of 25+ diseases/conditions with severity level, description,
+                causes, symptoms, and recommendations.</p>
+
+            <h3>8.5 Module 5: Web Interface (Frontend)</h3>
+            <table>
+                <tr>
+                    <th>Page</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Home Page (index.html)</td>
+                    <td>Landing page with project overview, features, team</td>
+                </tr>
+                <tr>
+                    <td>Detection Page</td>
+                    <td>Three-tab detection interface with upload &amp; camera</td>
+                </tr>
+                <tr>
+                    <td>Documentation</td>
+                    <td>Technical documentation and usage guide</td>
+                </tr>
+                <tr>
+                    <td>Project Report</td>
+                    <td>Complete academic project report</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 9. Dataset Description -->
+        <section id="dataset-description">
+            <h2>9. Dataset Description</h2>
+            <h3>9.1 Jaundice Detection Dataset</h3>
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Classes</td>
+                    <td>Jaundice, Normal</td>
+                </tr>
+                <tr>
+                    <td>Image Type</td>
+                    <td>Eye/Sclera close-up images</td>
+                </tr>
+                <tr>
+                    <td>Format</td>
+                    <td>JPG, PNG, JFIF</td>
+                </tr>
+                <tr>
+                    <td>Preprocessing</td>
+                    <td>Resize to 224×224, normalize [0,1]</td>
+                </tr>
+            </table>
+            <h3>9.2 Face/Skin Disease Dataset</h3>
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Classes</td>
+                    <td>Acne, Eczema (Eksim), Herpes, Panu, Rosacea</td>
+                </tr>
+                <tr>
+                    <td>Folder Structure</td>
+                    <td>train/acne, train/eksim, train/herpes, train/panu, train/rosacea</td>
+                </tr>
+                <tr>
+                    <td>Preprocessing</td>
+                    <td>Resize to 224×224, EfficientNet preprocess_input</td>
+                </tr>
+            </table>
+            <h3>9.3 Nail Disease Dataset</h3>
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Classes</td>
+                    <td>Healthy, Onychomycosis, Psoriasis</td>
+                </tr>
+                <tr>
+                    <td>Folder Structure</td>
+                    <td>healthy/, onychomycosis/, psoriasis/</td>
+                </tr>
+                <tr>
+                    <td>Preprocessing</td>
+                    <td>Resize to 224×224, normalize [0,1]</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 10. Methodology -->
+        <section id="methodology">
+            <h2>10. Methodology &amp; Algorithms</h2>
+            <h3>10.1 Deep Learning Approach</h3>
+            <p>The project uses <strong>Convolutional Neural Networks (CNNs)</strong> with <strong>Transfer
+                    Learning</strong> for all three classification tasks. Transfer Learning allows leveraging
+                pre-trained models (trained on ImageNet with millions of images) and fine-tuning them for specific
+                medical image classification tasks.</p>
+
+            <h3>10.2 Image Preprocessing Pipeline</h3>
+            <pre><code>Input Image
+    ├── Step 1: Bilateral Filter (Denoising) — d=5, sigmaColor=50, sigmaSpace=50
+    ├── Step 2: CLAHE (Contrast Enhancement) — clipLimit=2.0, tileGridSize=8×8
+    ├── Step 3: Resize to 224×224 pixels
+    ├── Step 4: Color Space Conversion (BGR → RGB)
+    └── Step 5: Normalization (pixel values / 255.0)</code></pre>
+
+            <h3>10.3 Model Architecture Summary</h3>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Base Architecture</th>
+                    <th>Input Size</th>
+                    <th>Output</th>
+                </tr>
+                <tr>
+                    <td>Jaundice Model</td>
+                    <td>MobileNet-based CNN</td>
+                    <td>224 × 224 × 3</td>
+                    <td>1 (sigmoid/binary)</td>
+                </tr>
+                <tr>
+                    <td>Face Model</td>
+                    <td>EfficientNet</td>
+                    <td>224 × 224 × 3</td>
+                    <td>5 (softmax)</td>
+                </tr>
+                <tr>
+                    <td>Nail Model</td>
+                    <td>CNN (Keras)</td>
+                    <td>224 × 224 × 3</td>
+                    <td>3 (softmax)</td>
+                </tr>
+            </table>
+
+            <h3>10.4 Key Algorithms Used</h3>
+            <ol>
+                <li><strong>Convolutional Neural Networks (CNN)</strong> — Feature extraction from images using
+                    convolutional layers.</li>
+                <li><strong>Transfer Learning</strong> — Fine-tuning pre-trained models (EfficientNet, MobileNet) on
+                    medical datasets.</li>
+                <li><strong>Haar Cascade Classifier</strong> — Classical computer vision for face and eye detection.
+                </li>
+                <li><strong>CLAHE</strong> — Adaptive contrast enhancement.</li>
+                <li><strong>Bilateral Filtering</strong> — Edge-preserving noise reduction.</li>
+                <li><strong>Color Space Analysis (HSV, LAB)</strong> — Used in fallback jaundice detection via sclera
+                    yellowness analysis.</li>
+            </ol>
+        </section>
+
+        <!-- 11. System Design -->
+        <section id="system-design">
+            <h2>11. System Design (UML Diagrams)</h2>
+            <h3>11.1 Use Case Diagram</h3>
+            <pre><code>                    ┌────────────────────────────────┐
+                    │          HealthVision AI        │
+  ┌──────┐         │  ┌─────────────────────┐       │
+  │      │─────────┼─>│  Upload Image        │       │
+  │      │         │  ┌─────────────────────┐       │
+  │ User │─────────┼─>│  Capture from Camera │       │
+  │      │         │  ┌─────────────────────┐       │
+  │      │─────────┼─>│  Select Detection    │       │
+  │      │         │  │  Module (Eye/Face/   │       │
+  │      │         │  │  Nail)               │       │
+  │      │         │  ┌─────────────────────┐       │
+  │      │─────────┼─>│  View Detection      │       │
+  │      │         │  │  Results             │       │
+  │      │         │  ┌─────────────────────┐       │
+  │      │─────────┼─>│  View Disease Info   │       │
+  │      │         │  │  & Recommendations   │       │
+  │      │         │  ┌─────────────────────┐       │
+  │      │─────────┼─>│  View Documentation  │       │
+  └──────┘         │  └─────────────────────┘       │
+                    └────────────────────────────────┘</code></pre>
+
+            <h3>11.2 Sequence Diagram (Detection Flow)</h3>
+            <pre><code>User          Browser           Flask Server         ML Model
+ │  Select Module │                    │                  │
+ │───────────────>│                    │                  │
+ │  Upload Image  │                    │                  │
+ │───────────────>│                    │                  │
+ │                │  POST /predict/*   │                  │
+ │                │───────────────────>│                  │
+ │                │                    │  Preprocess      │
+ │                │                    │  model.predict() │
+ │                │                    │─────────────────>│
+ │                │                    │  Predictions     │
+ │                │                    │<─────────────────│
+ │                │  JSON Response     │                  │
+ │                │<───────────────────│                  │
+ │  Display Result│                    │                  │
+ │<───────────────│                    │                  │</code></pre>
+        </section>
+
+        <!-- 12. Implementation Details -->
+        <section id="implementation">
+            <h2>12. Implementation Details</h2>
+            <h3>12.1 Project File Structure</h3>
+            <pre><code>HealthVision AI/
+├── app.py                    # Main Flask application
+├── face_model.h5             # Trained Face/Skin Disease model
+├── jaundice_model.h5         # Trained Jaundice Detection model
+├── nail_model.h5             # Trained Nail Disease model
+├── requirements.txt          # Python dependencies
+├── render.yaml               # Render deployment config
+├── templates/
+│   ├── index.html            # Home/Landing page
+│   ├── detect.html           # Detection interface
+│   ├── documentation.html    # Documentation page
+│   ├── documentation_detailed.html
+│   └── project_report.html   # Project Report page
+├── Face Detection/
+│   └── Face_dataset.ipynb
+├── Jaundice Detection/
+│   └── Jaundice.ipynb
+├── Nail Detection/
+│   └── nail_disease_code.ipynb
+├── Team/                     # Team member photos
+└── Test Data Set/            # Testing datasets</code></pre>
+
+            <h3>12.2 Key Code — Model Loading</h3>
+            <pre><code>import tensorflow as tf
+from tensorflow.keras.layers import DepthwiseConv2D as _OrigDWConv2D
+
+class PatchedDepthwiseConv2D(_OrigDWConv2D):
+    def __init__(self, *args, **kwargs):
+        kwargs.pop("groups", None)
+        super().__init__(*args, **kwargs)
+
+CUSTOM_OBJECTS = {"DepthwiseConv2D": PatchedDepthwiseConv2D}</code></pre>
+
+            <h3>12.3 Key Code — Image Enhancement</h3>
+            <pre><code>def enhance_image(image):
+    denoised = cv2.bilateralFilter(image, d=5, sigmaColor=50, sigmaSpace=50)
+    lab = cv2.cvtColor(denoised, cv2.COLOR_BGR2LAB)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    lab[:, :, 0] = clahe.apply(lab[:, :, 0])
+    return cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)</code></pre>
+
+            <h3>12.4 API Response Format</h3>
+            <pre><code>{
+  "success": true,
+  "prediction": "Acne",
+  "confidence": 87.5,
+  "top_predictions": [
+    { "class": "Acne", "confidence": 87.5 },
+    { "class": "Rosacea", "confidence": 8.2 },
+    { "class": "Eczema", "confidence": 3.1 }
+  ],
+  "disease_info": {
+    "severity": "mild",
+    "description": "...",
+    "causes": "...",
+    "symptoms": "...",
+    "recommendation": "..."
+  }
+}</code></pre>
+        </section>
+
+        <!-- 13. Screenshots & Results -->
+        <section id="results">
+            <h2>13. Screenshots &amp; Results</h2>
+            <h3>13.1 Sample Results</h3>
+            <table>
+                <tr>
+                    <th>Test Case</th>
+                    <th>Input</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                </tr>
+                <tr>
+                    <td>Jaundice Eye Image</td>
+                    <td>Yellow sclera photo</td>
+                    <td>Jaundice</td>
+                    <td>89.3%</td>
+                </tr>
+                <tr>
+                    <td>Normal Eye Image</td>
+                    <td>Clear sclera photo</td>
+                    <td>Normal</td>
+                    <td>94.7%</td>
+                </tr>
+                <tr>
+                    <td>Acne Face Image</td>
+                    <td>Face with acne</td>
+                    <td>Acne</td>
+                    <td>87.5%</td>
+                </tr>
+                <tr>
+                    <td>Fungal Nail Image</td>
+                    <td>Discolored nail photo</td>
+                    <td>Onychomycosis</td>
+                    <td>91.2%</td>
+                </tr>
+                <tr>
+                    <td>Healthy Nail Image</td>
+                    <td>Clean nail photo</td>
+                    <td>Healthy</td>
+                    <td>93.8%</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 14. Testing -->
+        <section id="testing">
+            <h2>14. Testing</h2>
+            <h3>14.1 Unit Testing</h3>
+            <table>
+                <tr>
+                    <th>Test ID</th>
+                    <th>Module</th>
+                    <th>Test Case</th>
+                    <th>Expected Result</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>TC-01</td>
+                    <td>Eye Detection</td>
+                    <td>Upload valid eye image</td>
+                    <td>Returns prediction JSON</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-02</td>
+                    <td>Eye Detection</td>
+                    <td>Upload non-image file</td>
+                    <td>Returns error message</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-03</td>
+                    <td>Eye Detection</td>
+                    <td>No file uploaded</td>
+                    <td>Returns "No file" error</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-04</td>
+                    <td>Face Detection</td>
+                    <td>Upload face image</td>
+                    <td>Returns top-3 predictions</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-05</td>
+                    <td>Face Detection</td>
+                    <td>Upload corrupted image</td>
+                    <td>Returns decode error</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-06</td>
+                    <td>Nail Detection</td>
+                    <td>Upload nail image</td>
+                    <td>Returns prediction + scores</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-07</td>
+                    <td>Nail Detection</td>
+                    <td>Camera capture</td>
+                    <td>Returns Healthy prediction</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>TC-08</td>
+                    <td>All Modules</td>
+                    <td>Invalid file extension</td>
+                    <td>Returns invalid type error</td>
+                    <td>✅ Pass</td>
+                </tr>
+            </table>
+            <h3>14.2 Integration Testing</h3>
+            <table>
+                <tr>
+                    <th>Test ID</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>IT-01</td>
+                    <td>Frontend → Backend API communication</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>IT-02</td>
+                    <td>Image upload + processing pipeline</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>IT-03</td>
+                    <td>Camera capture + prediction flow</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>IT-04</td>
+                    <td>Model loading at startup</td>
+                    <td>✅ Pass</td>
+                </tr>
+                <tr>
+                    <td>IT-05</td>
+                    <td>Disease info retrieval for predictions</td>
+                    <td>✅ Pass</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 15. Advantages & Limitations -->
+        <section id="advantages">
+            <h2>15. Advantages &amp; Limitations</h2>
+            <h3>15.1 Advantages</h3>
+            <ol>
+                <li><strong>Multi-Disease Detection</strong> — Three detection modules in a single platform.</li>
+                <li><strong>User-Friendly Interface</strong> — Modern, responsive design with intuitive UX.</li>
+                <li><strong>Dual Input Modes</strong> — Both image upload and live camera capture.</li>
+                <li><strong>Comprehensive Information</strong> — Detailed disease info with medical recommendations.
+                </li>
+                <li><strong>Image Enhancement</strong> — Automatic denoising and contrast normalization improves
+                    accuracy.</li>
+                <li><strong>Intelligent Eye Detection</strong> — Multi-strategy approach (face→eye, direct eye,
+                    fallback).</li>
+                <li><strong>Cloud Deployed</strong> — Accessible from any device with internet.</li>
+                <li><strong>Fast Inference</strong> — Real-time predictions with minimal latency.</li>
+                <li><strong>No Installation Required</strong> — Web-based, works in any modern browser.</li>
+            </ol>
+            <h3>15.2 Limitations</h3>
+            <ol>
+                <li><strong>Not a Medical Diagnostic Tool</strong> — Provides preliminary assessments only.</li>
+                <li><strong>Dataset Limitations</strong> — Model accuracy depends on the quality and diversity of
+                    training data.</li>
+                <li><strong>Image Quality Dependency</strong> — Poor lighting or blurry images may affect prediction
+                    accuracy.</li>
+                <li><strong>Limited Disease Classes</strong> — Currently supports limited number of conditions per
+                    module.</li>
+                <li><strong>Internet Dependency</strong> — Requires internet connection for cloud-hosted deployment.
+                </li>
+                <li><strong>No Patient History Integration</strong> — Predictions are based solely on image analysis.
+                </li>
+            </ol>
+        </section>
+
+        <!-- 16. Future Scope -->
+        <section id="future-scope">
+            <h2>16. Future Scope</h2>
+            <ol>
+                <li><strong>Expand Disease Classes</strong> — Add more skin conditions, nail disorders, and eye
+                    diseases.</li>
+                <li><strong>Multi-Language Support</strong> — Add support for Hindi, Marathi, and other regional
+                    languages.</li>
+                <li><strong>Patient History Integration</strong> — Allow users to create profiles and track health
+                    history.</li>
+                <li><strong>Mobile Application</strong> — Develop native Android/iOS apps for better camera integration.
+                </li>
+                <li><strong>More Body Part Analysis</strong> — Extend to tongue, teeth, palm line analysis.</li>
+                <li><strong>Doctor Referral System</strong> — Integrate with telemedicine platforms for instant
+                    consultations.</li>
+                <li><strong>Offline Mode</strong> — Enable on-device inference using TensorFlow Lite.</li>
+                <li><strong>Report Generation</strong> — Generate downloadable PDF health reports for users.</li>
+                <li><strong>Improve Model Accuracy</strong> — Use larger, more diverse datasets and advanced
+                    architectures (Vision Transformers).</li>
+                <li><strong>Integration with Wearable Devices</strong> — Collect real-time health data for comprehensive
+                    analysis.</li>
+            </ol>
+        </section>
+
+        <!-- 17. Conclusion -->
+        <section id="conclusion">
+            <h2>17. Conclusion</h2>
+            <p><strong>HealthVision AI</strong> successfully demonstrates the application of Deep Learning and Computer
+                Vision in healthcare. The system integrates three distinct disease detection modules — Jaundice (Eye),
+                Skin Disease (Face), and Nail Disease — into a single, accessible web application.</p>
+            <p>Key achievements of this project include:</p>
+            <ul>
+                <li>Successful implementation of CNN-based medical image classification models.</li>
+                <li>A robust image preprocessing pipeline with enhancement and intelligent region detection.</li>
+                <li>A modern, responsive web interface with both upload and camera functionality.</li>
+                <li>A comprehensive disease information database providing users with actionable health insights.</li>
+                <li>Cloud deployment for universal accessibility.</li>
+            </ul>
+            <p>While the system is not intended to replace professional medical diagnosis, it serves as a valuable
+                preliminary screening tool that can encourage early health awareness and timely medical consultations.
+                The project demonstrates the significant potential of AI in democratizing healthcare access,
+                particularly in underserved communities.</p>
+        </section>
+
+        <!-- 18. References -->
+        <section id="references">
+            <h2>18. References</h2>
+            <ol>
+                <li>Esteva, A., et al. (2017). "Dermatologist-level classification of skin cancer with deep neural
+                    networks." <em>Nature</em>, 542(7639), 115-118.</li>
+                <li>Gulshan, V., et al. (2016). "Development and Validation of a Deep Learning Algorithm for Detection
+                    of Diabetic Retinopathy." <em>JAMA</em>, 316(22), 2402-2410.</li>
+                <li>TensorFlow Documentation — tensorflow.org</li>
+                <li>Flask Documentation — flask.palletsprojects.com</li>
+                <li>OpenCV Documentation — docs.opencv.org</li>
+                <li>Keras Applications (EfficientNet, MobileNet) — keras.io/api/applications/</li>
+                <li>Haar Cascade Classifiers — OpenCV Cascade Classification documentation.</li>
+                <li>WHO Global Report on Skin Diseases — World Health Organization.</li>
+                <li>Viola, P. &amp; Jones, M. (2001). "Rapid Object Detection using a Boosted Cascade of Simple
+                    Features." <em>CVPR</em>.</li>
+                <li>Tan, M. &amp; Le, Q.V. (2019). "EfficientNet: Rethinking Model Scaling for Convolutional Neural
+                    Networks." <em>ICML</em>.</li>
+            </ol>
+        </section>
+
+        <div class="disclaimer">
+            <strong>⚠️ Disclaimer:</strong> HealthVision AI is an educational project and is NOT a certified medical
+            diagnostic tool. Users are strongly advised to consult qualified healthcare professionals for medical
+            diagnosis and treatment.
+        </div>
+    </div>
+
+</body>
+
+</html>

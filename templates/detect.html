@@ -1,0 +1,2671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detection — HealthVision AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-light: #06b6d4;
+            --primary-dark: #0e7490;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --dark: #042f2e;
+            --dark-700: #0f3d3c;
+            --dark-600: #134e4a;
+            --text: #f0fdfa;
+            --text-muted: #94a3b8;
+            --text-dark: #1e293b;
+            --white: #ffffff;
+            --off-white: #f0fdfa;
+            --red: #ef4444;
+            --amber: #f59e0b;
+            --green: #22c55e;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .12);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .18);
+            --transition: all .35s cubic-bezier(.4, 0, .2, 1);
+            --font: 'Inter', system-ui, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: linear-gradient(180deg, #f0fdfa 0%, #ecfdf5 30%, #e0f7fa 70%, #f0fdfa 100%);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ═══ NAVBAR ═══ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 0;
+            background: rgba(4, 47, 46, .92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .3);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(4, 47, 46, .97);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--text);
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            font-size: .92rem;
+            padding: 4px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-light);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-light);
+            border-radius: 2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+        }
+
+        /* ═══ HERO ═══ */
+        .detect-hero {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-700) 50%, var(--dark-600) 100%);
+            padding: 110px 24px 50px;
+            text-align: center;
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detect-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(8, 145, 178, .18) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, rgba(16, 185, 129, .12) 0%, transparent 50%);
+        }
+
+        .detect-hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .detect-hero .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
+            background: rgba(6, 182, 212, .15);
+            border: 1px solid rgba(6, 182, 212, .3);
+            color: var(--primary-light);
+            font-size: .82rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .detect-hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .detect-hero h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detect-hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .85rem;
+            color: rgba(240, 253, 250, .85);
+        }
+
+        .hero-feature .hf-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(6, 182, 212, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        /* ═══ MAIN SECTION ═══ */
+        .detect-section {
+            max-width: 1160px;
+            margin: -30px auto 40px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .detect-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 40px rgba(8, 145, 178, .10), 0 1px 3px rgba(0, 0, 0, .06);
+            padding: 36px 32px;
+            position: relative;
+            border: 1px solid rgba(8, 145, 178, .08);
+        }
+
+        /* Side-by-side layout on desktop */
+        .detect-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .detect-input-col {
+            position: relative;
+        }
+
+        .detect-result-col {
+            position: relative;
+            min-height: 200px;
+        }
+
+        /* ═══ MODULE TABS ═══ */
+        .module-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .module-tab {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 10px;
+            text-align: center;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: .85rem;
+            background: #f1f5f9;
+            color: var(--text-dark);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-tab:hover:not(.active) {
+            background: #e2e8f0;
+            border-color: rgba(8, 145, 178, .2);
+            transform: translateY(-1px);
+        }
+
+        .module-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            border-color: transparent;
+        }
+
+        .module-tab .tab-icon {
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ═══ MODE TOGGLE ═══ */
+        .mode-toggle {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            background: #f1f5f9;
+            border-radius: var(--radius);
+            padding: 4px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: .85rem;
+            background: transparent;
+            color: var(--text-dark);
+            transition: var(--transition);
+            border: none;
+        }
+
+        .mode-btn.active {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+            color: var(--primary);
+        }
+
+        /* ═══ UPLOAD ZONE ═══ */
+        .upload-zone {
+            border: 2px dashed rgba(8, 145, 178, .3);
+            border-radius: var(--radius-lg);
+            padding: 44px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            background: linear-gradient(135deg, rgba(8, 145, 178, .02) 0%, rgba(16, 185, 129, .02) 100%);
+        }
+
+        .upload-zone:hover,
+        .upload-zone.drag-over {
+            border-color: var(--primary);
+            background: rgba(8, 145, 178, .06);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(8, 145, 178, .12);
+        }
+
+        .upload-zone .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+            display: block;
+        }
+
+        .upload-zone h4 {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .upload-zone p {
+            font-size: .8rem;
+            color: var(--text-muted);
+        }
+
+        .upload-zone .browse-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 28px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            font-weight: 700;
+            font-size: .88rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 3px 12px rgba(8, 145, 178, .2);
+        }
+
+        .upload-zone .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(8, 145, 178, .35);
+        }
+
+        .upload-zone input {
+            display: none;
+        }
+
+        /* ═══ CAMERA ═══ */
+        .camera-container {
+            display: none;
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #000;
+        }
+
+        .camera-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+        }
+
+        .camera-container canvas.overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .camera-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+
+        .cam-btn {
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: .88rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .cam-capture {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+        }
+
+        .cam-retake {
+            background: #f1f5f9;
+            color: var(--text-dark);
+            display: none;
+        }
+
+        .cam-flip {
+            background: #1e293b;
+            color: var(--white);
+        }
+
+        .cam-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ═══ PREVIEW ═══ */
+        .preview-container {
+            display: none;
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-top: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
+            border: 2px solid rgba(8, 145, 178, .12);
+        }
+
+        .preview-container img {
+            width: 100%;
+            border-radius: var(--radius);
+            display: block;
+        }
+
+        /* ═══ SCAN OVERLAY ═══ */
+        .scan-overlay {
+            position: absolute;
+            inset: 0;
+            display: none;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .scan-overlay.active {
+            display: block;
+        }
+
+        .scan-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, var(--primary-light) 20%, var(--accent-light) 50%, var(--primary-light) 80%, transparent 100%);
+            box-shadow: 0 0 15px var(--primary-light), 0 0 30px rgba(6, 182, 212, .3);
+            animation: scan-sweep 2.2s ease-in-out infinite;
+        }
+
+        @keyframes scan-sweep {
+            0% {
+                top: 5%;
+            }
+
+            50% {
+                top: 92%;
+            }
+
+            100% {
+                top: 5%;
+            }
+        }
+
+        .scan-corner {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--primary-light);
+            animation: corner-pulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes corner-pulse {
+            0% {
+                opacity: .6;
+                border-color: var(--primary-light);
+            }
+
+            100% {
+                opacity: 1;
+                border-color: var(--accent-light);
+            }
+        }
+
+        .scan-corner.tl {
+            top: 6px;
+            left: 6px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .scan-corner.tr {
+            top: 6px;
+            right: 6px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .scan-corner.bl {
+            bottom: 6px;
+            left: 6px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .scan-corner.br {
+            bottom: 6px;
+            right: 6px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .scan-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(6, 182, 212, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, .06) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: grid-fade 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes grid-fade {
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        .scan-border {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            animation: border-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes border-glow {
+
+            0%,
+            100% {
+                border-color: rgba(6, 182, 212, .2);
+                box-shadow: inset 0 0 20px rgba(6, 182, 212, .05);
+            }
+
+            50% {
+                border-color: rgba(6, 182, 212, .6);
+                box-shadow: inset 0 0 30px rgba(6, 182, 212, .1);
+            }
+        }
+
+        .analyzing-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 47, 46, .6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: var(--radius);
+            z-index: 10;
+            backdrop-filter: blur(2px);
+        }
+
+        .analyzing-overlay.active {
+            display: flex;
+        }
+
+        .analyzing-overlay .analyze-text {
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: .9rem;
+            margin-top: 12px;
+            animation: text-pulse 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes text-pulse {
+            0% {
+                opacity: .6;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .mini-spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(6, 182, 212, .2);
+            border-top-color: var(--primary-light);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(245, 158, 11, .15);
+            border: 1px solid var(--amber);
+            color: var(--amber);
+            font-size: .72rem;
+            font-weight: 700;
+            border-radius: var(--radius-full);
+            margin-top: 8px;
+        }
+
+        /* ═══ PREDICT BUTTON ═══ */
+        .predict-btn {
+            display: none;
+            width: 100%;
+            padding: 16px;
+            margin-top: 18px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: .3px;
+            box-shadow: 0 4px 16px rgba(8, 145, 178, .2);
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(8, 145, 178, .4);
+        }
+
+        .predict-btn:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ═══ LOADING ═══ */
+        .loading-state {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: .95rem;
+        }
+
+        /* ═══ RESULTS ═══ */
+        .result-card {
+            display: none;
+            margin-top: 0;
+            border-radius: var(--radius-lg);
+            padding: 0;
+            border: 2px solid #e2e8f0;
+            transition: var(--transition);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+        }
+
+        .result-card.normal {
+            border-color: var(--green);
+            background: linear-gradient(135deg, rgba(34, 197, 94, .03) 0%, rgba(16, 185, 129, .06) 100%);
+            box-shadow: 0 4px 24px rgba(34, 197, 94, .12);
+        }
+
+        .result-card.jaundice,
+        .result-card.disease {
+            border-color: var(--amber);
+            background: linear-gradient(135deg, rgba(245, 158, 11, .03) 0%, rgba(245, 158, 11, .06) 100%);
+            box-shadow: 0 4px 24px rgba(245, 158, 11, .12);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 22px 24px;
+            border-bottom: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        .result-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+        }
+
+        .result-card.normal .result-icon {
+            background: linear-gradient(135deg, rgba(34, 197, 94, .15), rgba(16, 185, 129, .2));
+        }
+
+        .result-card.jaundice .result-icon,
+        .result-card.disease .result-icon {
+            background: linear-gradient(135deg, rgba(245, 158, 11, .15), rgba(245, 158, 11, .2));
+        }
+
+        .result-header-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .result-status {
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .result-card.normal .result-status {
+            background: rgba(34, 197, 94, .12);
+            color: var(--green);
+        }
+
+        .result-card.jaundice .result-status,
+        .result-card.disease .result-status {
+            background: rgba(245, 158, 11, .12);
+            color: var(--amber);
+        }
+
+        .result-label {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+            letter-spacing: -.3px;
+        }
+
+        .result-card.normal .result-label {
+            color: var(--green);
+        }
+
+        .result-card.jaundice .result-label,
+        .result-card.disease .result-label {
+            color: var(--amber);
+        }
+
+        .result-confidence {
+            font-size: .88rem;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .result-body {
+            padding: 22px 24px;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .result-raw {
+            font-size: .78rem;
+            color: var(--text-muted);
+            font-style: italic;
+            opacity: .7;
+        }
+
+        /* ═══ TOP PREDICTIONS ═══ */
+        .top-preds {
+            margin-top: 12px;
+        }
+
+        .top-preds h4 {
+            font-size: .88rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .top-pred-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: .85rem;
+            border-radius: 6px;
+            transition: background .2s;
+        }
+
+        .top-pred-item:last-child {
+            border-bottom: none;
+        }
+
+        .top-pred-item:hover {
+            background: rgba(8, 145, 178, .04);
+        }
+
+        .top-pred-item .pred-rank {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: .68rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .top-pred-item .pred-bar {
+            flex: 1;
+            margin: 0 12px;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            align-self: center;
+        }
+
+        .top-pred-item .pred-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            transition: width .8s ease;
+        }
+
+        /* ═══ EYE CROP PREVIEW ═══ */
+        .eye-crop-preview {
+            margin-top: 18px;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(8, 145, 178, .03) 0%, rgba(16, 185, 129, .03) 100%);
+            border: 1px solid rgba(8, 145, 178, .1);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .eye-crop-preview img {
+            border-radius: var(--radius);
+            max-height: 180px;
+            margin: 0 auto;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+            border: 2px solid rgba(8, 145, 178, .15);
+        }
+
+        .eye-crop-preview .lbl {
+            font-size: .75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ═══ DUAL BAR ═══ */
+        .dual-bar-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .healthy-bar-section {
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, .04) 0%, rgba(16, 185, 129, .08) 100%);
+            border: 1px solid rgba(34, 197, 94, .18);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .healthy-bar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .healthy-bar-label {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .healthy-bar-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .healthy-bar-track {
+            width: 100%;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .healthy-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, #22c55e 0%, #34d399 100%);
+            width: 0;
+            transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .disease-bar-section {
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, .04) 0%, rgba(245, 158, 11, .08) 100%);
+            border: 1px solid rgba(245, 158, 11, .18);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .disease-bar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .disease-bar-label {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--amber);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .disease-bar-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--amber);
+        }
+
+        .disease-bar-track {
+            width: 100%;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .disease-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+            width: 0;
+            transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        /* ═══ AI SUMMARY ═══ */
+        .ai-summary {
+            border-top: 2px solid rgba(8, 145, 178, .12);
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(8, 145, 178, .03) 0%, rgba(16, 185, 129, .05) 100%);
+        }
+
+        .ai-summary-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .ai-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 3px 12px rgba(8, 145, 178, .3);
+            animation: avatar-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes avatar-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 3px 12px rgba(8, 145, 178, .3);
+            }
+
+            50% {
+                box-shadow: 0 3px 20px rgba(8, 145, 178, .5);
+            }
+        }
+
+        .ai-summary-header .ai-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .ai-summary-header .ai-subtitle {
+            font-size: .75rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .ai-summary-body {
+            font-size: .85rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .ai-summary-body p {
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+            font-size: .88rem;
+            line-height: 1.7;
+        }
+
+        .ai-info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .ai-info-item {
+            padding: 16px 18px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-info-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 0 4px 4px 0;
+        }
+
+        .ai-info-item:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 16px rgba(8, 145, 178, .1);
+            transform: translateX(3px);
+        }
+
+        .ai-info-item .info-label {
+            font-size: .76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ai-info-item .info-text {
+            font-size: .84rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .severity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .severity-badge.healthy {
+            background: rgba(34, 197, 94, .12);
+            color: var(--green);
+        }
+
+        .severity-badge.mild {
+            background: rgba(59, 130, 246, .12);
+            color: #3b82f6;
+        }
+
+        .severity-badge.moderate {
+            background: rgba(245, 158, 11, .12);
+            color: var(--amber);
+        }
+
+        .severity-badge.high {
+            background: rgba(239, 68, 68, .12);
+            color: var(--red);
+        }
+
+        .summary-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            font-weight: 700;
+            font-size: .85rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: .3px;
+            box-shadow: 0 4px 16px rgba(8, 145, 178, .25);
+        }
+
+        .summary-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(8, 145, 178, .4);
+        }
+
+        /* ═══ REPORT MODAL ═══ */
+        .report-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(4, 47, 46, .65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            animation: modalFadeIn .3s ease;
+        }
+
+        .report-modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .report-modal {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 640px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .25), 0 0 0 1px rgba(8, 145, 178, .1);
+            animation: modalSlideIn .35s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .report-modal-header {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, var(--dark), var(--dark-700));
+            color: var(--text);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .report-modal-header .modal-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .report-modal-header .modal-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .report-modal-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .report-modal-header .modal-subtitle {
+            font-size: .75rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .report-modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, .1);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .report-modal-close:hover {
+            background: rgba(255, 255, 255, .2);
+            transform: rotate(90deg);
+        }
+
+        .report-modal-body {
+            padding: 24px;
+        }
+
+        .report-prediction-banner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .report-prediction-banner.healthy {
+            background: linear-gradient(135deg, rgba(34, 197, 94, .08), rgba(16, 185, 129, .12));
+            border: 1px solid rgba(34, 197, 94, .25);
+        }
+
+        .report-prediction-banner.disease {
+            background: linear-gradient(135deg, rgba(245, 158, 11, .08), rgba(245, 158, 11, .12));
+            border: 1px solid rgba(245, 158, 11, .25);
+        }
+
+        .report-pred-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .report-prediction-banner.healthy .report-pred-icon {
+            background: rgba(34, 197, 94, .15);
+        }
+
+        .report-prediction-banner.disease .report-pred-icon {
+            background: rgba(245, 158, 11, .15);
+        }
+
+        .report-pred-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .report-prediction-banner.healthy .report-pred-name {
+            color: var(--green);
+        }
+
+        .report-prediction-banner.disease .report-pred-name {
+            color: var(--amber);
+        }
+
+        .report-pred-conf {
+            font-size: .85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .report-section {
+            margin-bottom: 18px;
+        }
+
+        .report-section-title {
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .report-desc {
+            font-size: .88rem;
+            color: var(--text-dark);
+            line-height: 1.75;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, rgba(8, 145, 178, .03), rgba(16, 185, 129, .04));
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+        }
+
+        .report-detail-card {
+            padding: 16px 18px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .report-detail-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .report-detail-card.causes::before {
+            background: linear-gradient(180deg, #7c3aed, #a78bfa);
+        }
+
+        .report-detail-card.symptoms::before {
+            background: linear-gradient(180deg, #f59e0b, #fbbf24);
+        }
+
+        .report-detail-card.recommendation::before {
+            background: linear-gradient(180deg, #22c55e, #34d399);
+        }
+
+        .report-detail-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 16px rgba(8, 145, 178, .08);
+            transform: translateX(3px);
+        }
+
+        .report-detail-label {
+            font-size: .74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .report-detail-card.causes .report-detail-label {
+            color: #7c3aed;
+        }
+
+        .report-detail-card.symptoms .report-detail-label {
+            color: #d97706;
+        }
+
+        .report-detail-card.recommendation .report-detail-label {
+            color: #059669;
+        }
+
+        .report-detail-text {
+            font-size: .85rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .report-modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fffe;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            text-align: center;
+        }
+
+        .report-disclaimer {
+            font-size: .72rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Modal responsive */
+        @media(max-width:640px) {
+            .report-modal {
+                max-height: 90vh;
+                border-radius: var(--radius) var(--radius) 0 0;
+                margin-top: auto;
+            }
+
+            .report-modal-overlay {
+                align-items: flex-end;
+                padding: 0;
+            }
+
+            .report-modal-header {
+                border-radius: var(--radius) var(--radius) 0 0;
+                padding: 16px 18px;
+            }
+
+            .report-modal-body {
+                padding: 18px;
+            }
+        }
+
+        .error-box {
+            display: none;
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: var(--radius);
+            background: rgba(239, 68, 68, .08);
+            border: 1px solid var(--red);
+            color: var(--red);
+            font-weight: 600;
+            font-size: .9rem;
+        }
+
+        /* ═══ INFO CARDS BELOW ═══ */
+        .info-strip {
+            max-width: 1160px;
+            margin: 0 auto 40px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card .ic-icon {
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .info-card p {
+            font-size: .84rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* ═══ FOOTER ═══ */
+        .footer {
+            background: var(--dark);
+            color: var(--text);
+            text-align: center;
+            padding: 36px 24px 20px;
+        }
+
+        .footer p {
+            font-size: .85rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .footer .disclaimer {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: var(--radius);
+            background: rgba(239, 68, 68, .08);
+            border: 1px solid rgba(239, 68, 68, .2);
+            font-size: .78rem;
+            color: #fca5a5;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media(max-width:1024px) {
+            .detect-card {
+                max-width: 100%;
+                padding: 28px 22px;
+            }
+
+            .detect-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .result-card {
+                margin-top: 20px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(4, 47, 46, .95);
+                flex-direction: column;
+                padding: 20px 24px;
+                gap: 16px;
+                backdrop-filter: blur(18px);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .detect-hero {
+                padding: 100px 20px 40px;
+            }
+
+            .detect-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .detect-section {
+                padding: 0 10px;
+            }
+
+            .detect-card {
+                padding: 16px 10px;
+                max-width: 100%;
+            }
+
+            .detect-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .camera-container {
+                border-radius: 8px;
+                margin: 0 -2px;
+            }
+
+            .camera-container video {
+                width: 100%;
+                height: auto;
+                min-height: 50vh;
+                object-fit: cover;
+            }
+
+            .preview-container {
+                margin-top: 10px;
+            }
+
+            .preview-container img {
+                width: 100%;
+                height: auto;
+            }
+
+            .result-card {
+                margin-top: 16px;
+            }
+
+            .dual-bar-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .result-header {
+                padding: 16px;
+                gap: 12px;
+            }
+
+            .result-body {
+                padding: 16px;
+            }
+
+            .ai-summary {
+                padding: 16px;
+            }
+
+            .result-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+
+            .result-label {
+                font-size: 1.2rem;
+            }
+
+            .info-strip {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .hero-features {
+                gap: 18px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .detect-hero {
+                padding: 90px 16px 36px;
+            }
+
+            .detect-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .detect-section {
+                padding: 0 6px;
+            }
+
+            .module-tabs {
+                flex-direction: column;
+            }
+
+            .module-tab {
+                min-width: auto;
+            }
+
+            .detect-card {
+                padding: 12px 8px;
+                border-radius: var(--radius);
+            }
+
+            .camera-container {
+                border-radius: 6px;
+                margin: 0 -4px;
+            }
+
+            .camera-container video {
+                min-height: 55vh;
+            }
+
+            .camera-btns {
+                margin-top: 10px;
+            }
+
+            .cam-btn {
+                padding: 10px 20px;
+                font-size: .82rem;
+            }
+
+            .upload-zone {
+                padding: 24px 12px;
+            }
+
+            .mode-toggle {
+                gap: 6px;
+            }
+
+            .mode-btn {
+                padding: 8px 14px;
+                font-size: .82rem;
+            }
+
+            .dual-bar-container {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .result-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px 14px;
+            }
+
+            .result-header-text {
+                text-align: center;
+            }
+
+            .ai-info-grid {
+                gap: 8px;
+            }
+
+            .ai-info-item {
+                padding: 10px 12px;
+            }
+
+            .hero-features {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                justify-items: start;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-feature {
+                white-space: nowrap;
+            }
+        }
+
+        @media(max-width:360px) {
+            .mode-toggle {
+                flex-direction: column;
+            }
+
+            .mode-btn {
+                font-size: .8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <svg viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="#06b6d4" stroke-width="2" />
+                    <circle cx="16" cy="16" r="6" fill="#06b6d4" />
+                    <circle cx="16" cy="16" r="2.5" fill="#042f2e" />
+                    <path d="M2 16c4-8 10-12 14-12s10 4 14 12c-4 8-10 12-14 12S6 24 2 16z" stroke="#06b6d4"
+                        stroke-width="1.5" fill="none" opacity=".4" />
+                </svg>
+                HealthVision AI
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/">Home</a>
+                <a href="/detect" class="active">Detect</a>
+                <a href="/documentation">📖 Docs</a>
+                <a href="/report">📄 Report</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="detect-hero">
+        <span class="badge">🔍 AI-Powered Detection</span>
+        <h1>Health <span>Screening Tool</span></h1>
+        <p>Choose a detection module, upload an image or use your camera, and get instant AI-powered analysis with
+            confidence scores and detailed reports.</p>
+        <div class="hero-features">
+            <div class="hero-feature">
+                <div class="hf-icon">👁️</div>
+                <span>Eye / Jaundice</span>
+            </div>
+            <div class="hero-feature">
+                <div class="hf-icon">🧑</div>
+                <span>Face / Skin Disease</span>
+            </div>
+            <div class="hero-feature">
+                <div class="hf-icon">💅</div>
+                <span>Nail Disorder</span>
+            </div>
+            <div class="hero-feature">
+                <div class="hf-icon">⚡</div>
+                <span>&lt; 2s Analysis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DETECTION CARD ═══ -->
+    <section class="detect-section">
+        <div class="detect-card">
+            <!-- Module Tabs -->
+            <div class="module-tabs">
+                <div class="module-tab active" data-module="eye" onclick="switchModule('eye')">
+                    <span class="tab-icon">👁️</span> Eye / Jaundice
+                </div>
+                <div class="module-tab" data-module="face" onclick="switchModule('face')">
+                    <span class="tab-icon">🧑</span> Face / Skin
+                </div>
+                <div class="module-tab" data-module="nail" onclick="switchModule('nail')">
+                    <span class="tab-icon">💅</span> Nail Disease
+                </div>
+            </div>
+
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="uploadModeBtn" onclick="switchMode('upload')">📁 Upload
+                    Image</button>
+                <button class="mode-btn" id="cameraModeBtn" onclick="switchMode('camera')">📷 Use Camera</button>
+            </div>
+
+            <!-- Side-by-side layout wrapper -->
+            <div class="detect-layout">
+                <!-- Left column: Input -->
+                <div class="detect-input-col">
+                    <!-- Upload Zone -->
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">📤</div>
+                        <h4>Drag &amp; drop an image here</h4>
+                        <p>JPG, PNG, BMP, WebP — max 10 MB</p>
+                        <span class="browse-btn">Browse Files</span>
+                        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/bmp,image/webp">
+                    </div>
+
+                    <!-- Camera -->
+                    <div class="camera-container" id="cameraContainer">
+                        <video id="cameraVideo" autoplay playsinline></video>
+                        <canvas class="overlay" id="cameraOverlay"></canvas>
+                    </div>
+                    <div class="camera-btns" id="cameraBtns" style="display:none">
+                        <button class="cam-btn cam-capture" id="captureBtn" onclick="capturePhoto()">📸 Capture</button>
+                        <button class="cam-btn cam-flip" id="flipBtn" onclick="flipCamera()">🔄 Flip</button>
+                        <button class="cam-btn cam-retake" id="retakeBtn" onclick="retakePhoto()">🔄 Retake</button>
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="preview-container" id="previewContainer">
+                        <img id="previewImage" alt="Preview">
+                        <div class="scan-overlay" id="scanOverlay">
+                            <div class="scan-grid"></div>
+                            <div class="scan-border"></div>
+                            <div class="scan-line"></div>
+                            <div class="scan-corner tl"></div>
+                            <div class="scan-corner tr"></div>
+                            <div class="scan-corner bl"></div>
+                            <div class="scan-corner br"></div>
+                        </div>
+                        <div class="analyzing-overlay" id="analyzingOverlay">
+                            <div class="mini-spinner"></div>
+                            <div class="analyze-text">Processing image…</div>
+                        </div>
+                    </div>
+
+                    <!-- Predict Button -->
+                    <button class="predict-btn" id="predictBtn" onclick="runPrediction()">🔍 Analyse Image</button>
+
+                    <!-- Loading -->
+                    <div class="loading-state" id="loadingState">
+                        <div class="spinner"></div>
+                        <div class="loading-text" id="loadingText">Preprocessing image…</div>
+                    </div>
+                </div>
+
+                <!-- Right column: Result -->
+                <div class="detect-result-col">
+                    <div class="result-card" id="resultCard">
+                        <!-- Result Header -->
+                        <div class="result-header">
+                            <div class="result-icon" id="resultIcon">👁️</div>
+                            <div class="result-header-text">
+                                <div class="result-status" id="resultStatus">HEALTHY</div>
+                                <h2 class="result-label" id="resultLabel"></h2>
+                                <div class="result-confidence" id="resultConf"></div>
+                            </div>
+                        </div>
+
+                        <!-- Result Body -->
+                        <div class="result-body">
+                            <!-- Healthy / Disease dual bars -->
+                            <div class="dual-bar-container" id="dualBarContainer" style="display:none">
+                                <div id="healthyBarSection" class="healthy-bar-section">
+                                    <div class="healthy-bar-header">
+                                        <span class="healthy-bar-label">✅ Healthy</span>
+                                        <span class="healthy-bar-value" id="healthyBarValue">0%</span>
+                                    </div>
+                                    <div class="healthy-bar-track">
+                                        <div class="healthy-bar-fill" id="healthyBarFill"></div>
+                                    </div>
+                                </div>
+                                <div id="diseaseBarSection" class="disease-bar-section">
+                                    <div class="disease-bar-header">
+                                        <span class="disease-bar-label" id="diseaseBarLabel">⚠️ Disease</span>
+                                        <span class="disease-bar-value" id="diseaseBarValue">0%</span>
+                                    </div>
+                                    <div class="disease-bar-track">
+                                        <div class="disease-bar-fill" id="diseaseBarFill"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="confidence-bar" style="margin-top:8px">
+                                <div class="confidence-fill" id="confFill"></div>
+                            </div>
+                            <div class="result-raw" id="resultRaw"></div>
+                            <div class="top-preds" id="topPreds"></div>
+                            <div class="eye-crop-preview" id="eyeCropPreview" style="display:none">
+                                <img id="eyeCropImg" alt="Detected region">
+                                <div class="lbl" id="eyeCropLabel"></div>
+                            </div>
+                        </div>
+
+                        <!-- AI Summary Section -->
+                        <div class="ai-summary" id="aiSummary" style="display:none">
+                            <div class="ai-summary-header">
+                                <div class="ai-avatar">🤖</div>
+                                <div>
+                                    <div class="ai-title">HealthVision AI Analysis</div>
+                                    <div class="ai-subtitle">Automated medical insight</div>
+                                </div>
+                            </div>
+                            <div class="ai-summary-body">
+                                <p id="aiDescription"></p>
+                                <div id="aiSeverityContainer"></div>
+                                <button class="summary-toggle-btn" id="summaryToggleBtn" onclick="openReportModal()">
+                                    📋 View Detailed Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error -->
+                    <div class="error-box" id="errorBox"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ REPORT MODAL ═══ -->
+    <div class="report-modal-overlay" id="reportModalOverlay" onclick="closeReportModal(event)">
+        <div class="report-modal" onclick="event.stopPropagation()">
+            <div class="report-modal-header">
+                <div class="modal-title-group">
+                    <div class="modal-icon">📊</div>
+                    <div>
+                        <h3>Detailed Analysis Report</h3>
+                        <div class="modal-subtitle">HealthVision AI · Comprehensive Findings</div>
+                    </div>
+                </div>
+                <button class="report-modal-close" onclick="closeReportModal()">✕</button>
+            </div>
+            <div class="report-modal-body" id="reportModalBody">
+                <!-- Filled dynamically -->
+            </div>
+            <div class="report-modal-footer">
+                <div class="report-disclaimer">⚠️ This is an AI screening tool only. Always consult a healthcare
+                    professional.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ INFO CARDS ═══ -->
+    <div class="info-strip">
+        <div class="info-card">
+            <div class="ic-icon">🧠</div>
+            <h3>Deep Learning Models</h3>
+            <p>MobileNetV2 &amp; EfficientNetB0 transfer learning with two-stage training for high accuracy on medical
+                images.</p>
+        </div>
+        <div class="info-card">
+            <div class="ic-icon">🔒</div>
+            <h3>Privacy First</h3>
+            <p>All processing happens locally on the server. No images are stored, shared, or transmitted to third-party
+                services.</p>
+        </div>
+        <div class="info-card">
+            <div class="ic-icon">📱</div>
+            <h3>Works Everywhere</h3>
+            <p>Fully responsive — works seamlessly on desktops, tablets, and mobile phones with camera and upload
+                support.</p>
+        </div>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <strong style="font-size:1.1rem">HealthVision AI</strong>
+        <p>AI-Powered Multi-Health Detection Platform — Eyes · Face · Nails</p>
+        <div class="disclaimer">
+            ⚠️ <strong>Medical Disclaimer:</strong> HealthVision AI is an academic research project and screening tool
+            only. It is NOT a substitute for professional medical diagnosis, advice, or treatment. Always consult a
+            qualified healthcare provider for medical decisions.
+        </div>
+    </footer>
+
+    <script>
+        /* ─── State ─────────────────────────────────────────────── */
+        let currentModule = 'eye';
+        let currentMode = 'upload';
+        let selectedFile = null;
+        let cameraStream = null;
+        let capturedBlob = null;
+        let animFrameId = null;
+        let cameraReady = false;
+        let currentFacing = 'user';
+
+        const ENDPOINTS = { eye: '/predict/eye', face: '/predict/face', nail: '/predict/nail' };
+        const STATUS_MSGS = [
+            'Preprocessing image…',
+            'Detecting region of interest…',
+            'Running AI model inference…',
+            'Analysing features…',
+            'Computing confidence scores…',
+            'Generating prediction…'
+        ];
+        const MODULE_ICONS = { eye: '👁️', face: '🧑', nail: '💅' };
+
+        /* ─── DOM refs ──────────────────────────────────────────── */
+        const $ = id => document.getElementById(id);
+        const navbar = $('navbar');
+        const navLinks = $('navLinks');
+        const navToggle = $('navToggle');
+        const uploadZone = $('uploadZone');
+        const fileInput = $('fileInput');
+        const cameraContainer = $('cameraContainer');
+        const cameraBtns = $('cameraBtns');
+        const cameraVideo = $('cameraVideo');
+        const cameraOverlay = $('cameraOverlay');
+        const captureBtn = $('captureBtn');
+        const flipBtn = $('flipBtn');
+        const retakeBtn = $('retakeBtn');
+        const previewContainer = $('previewContainer');
+        const previewImage = $('previewImage');
+        const scanOverlay = $('scanOverlay');
+        const analyzingOverlay = $('analyzingOverlay');
+        const predictBtn = $('predictBtn');
+        const loadingState = $('loadingState');
+        const loadingText = $('loadingText');
+        const resultCard = $('resultCard');
+        const errorBox = $('errorBox');
+
+        /* ─── Navbar scroll ─────────────────────────────────────── */
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+
+        /* ─── Mobile nav toggle ─────────────────────────────────── */
+        navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        /* ─── Module Switch ─────────────────────────────────────── */
+        function switchModule(mod) {
+            currentModule = mod;
+            document.querySelectorAll('.module-tab').forEach(t => t.classList.toggle('active', t.dataset.module === mod));
+            resetState();
+        }
+
+        /* ─── Mode Switch ───────────────────────────────────────── */
+        function switchMode(mode) {
+            currentMode = mode;
+            $('uploadModeBtn').classList.toggle('active', mode === 'upload');
+            $('cameraModeBtn').classList.toggle('active', mode === 'camera');
+            resetState();
+
+            if (mode === 'camera') {
+                uploadZone.style.display = 'none';
+                cameraContainer.style.display = 'block';
+                cameraBtns.style.display = 'flex';
+                startCamera();
+            } else {
+                stopCamera();
+                uploadZone.style.display = '';
+                cameraContainer.style.display = 'none';
+                cameraBtns.style.display = 'none';
+            }
+        }
+
+        /* ─── Reset ─────────────────────────────────────────────── */
+        function resetState() {
+            selectedFile = null;
+            capturedBlob = null;
+            previewContainer.style.display = 'none';
+            predictBtn.style.display = 'none';
+            loadingState.style.display = 'none';
+            resultCard.style.display = 'none';
+            errorBox.style.display = 'none';
+            scanOverlay.classList.remove('active');
+            analyzingOverlay.classList.remove('active');
+            retakeBtn.style.display = 'none';
+            captureBtn.style.display = '';
+            fileInput.value = '';
+            $('healthyBarFill').style.width = '0';
+            $('diseaseBarFill').style.width = '0';
+            $('dualBarContainer').style.display = 'none';
+        }
+
+        function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        /* ─── Show scanning animation ───────────────────────────── */
+        async function showScanAnimation(durationMs) {
+            previewContainer.style.display = 'block';
+            scanOverlay.classList.add('active');
+            analyzingOverlay.classList.add('active');
+            await delay(durationMs || 1800);
+            scanOverlay.classList.remove('active');
+            analyzingOverlay.classList.remove('active');
+        }
+
+        /* ─── File Upload ───────────────────────────────────────── */
+        uploadZone.addEventListener('click', () => fileInput.click());
+        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+        uploadZone.addEventListener('drop', e => {
+            e.preventDefault(); uploadZone.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', e => { if (e.target.files.length) handleFile(e.target.files[0]); });
+
+        async function handleFile(file) {
+            if (file.size > 10 * 1024 * 1024) { showError('File exceeds 10 MB limit.'); return; }
+            selectedFile = file;
+            capturedBlob = null;
+            resultCard.style.display = 'none';
+            errorBox.style.display = 'none';
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'block';
+                await showScanAnimation(1500);
+                predictBtn.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /* ─── Camera ────────────────────────────────────────────── */
+        async function startCamera() {
+            cameraReady = false;
+            try {
+                const isMobile = window.innerWidth <= 768;
+                const constraints = isMobile
+                    ? { video: { facingMode: currentFacing, width: { ideal: 720 }, height: { ideal: 1280 } } }
+                    : { video: { facingMode: currentFacing, width: { ideal: 1920 }, height: { ideal: 1080 } } };
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                cameraVideo.style.transform = currentFacing === 'user' ? 'scaleX(-1)' : 'scaleX(1)';
+                cameraVideo.srcObject = cameraStream;
+                await new Promise((resolve) => {
+                    cameraVideo.onloadedmetadata = () => {
+                        cameraVideo.play().then(resolve).catch(resolve);
+                    };
+                });
+                await delay(300);
+                cameraReady = true;
+                drawOverlay();
+            } catch (err) {
+                console.error('Camera error:', err);
+                showError('Camera access denied or not available. Please allow camera permission and try again.');
+                switchMode('upload');
+            }
+        }
+
+        function stopCamera() {
+            cameraReady = false;
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            cameraVideo.srcObject = null;
+            if (animFrameId) { cancelAnimationFrame(animFrameId); animFrameId = null; }
+        }
+
+        function drawOverlay() {
+            const c = cameraOverlay;
+            const ctx = c.getContext('2d');
+
+            function draw() {
+                const vw = cameraVideo.videoWidth || 1280;
+                const vh = cameraVideo.videoHeight || 720;
+                if (c.width !== vw || c.height !== vh) { c.width = vw; c.height = vh; }
+
+                const cx = vw * 0.5, cy = vh * 0.5;
+                const rw = vw * 0.60, rh = vh * 0.84;
+                const rx = cx - rw / 2, ry = cy - rh / 2;
+                const cornerR = 20;
+
+                ctx.clearRect(0, 0, vw, vh);
+
+                ctx.fillStyle = 'rgba(0,0,0,0.55)';
+                ctx.fillRect(0, 0, vw, vh);
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.roundRect(rx, ry, rw, rh, cornerR);
+                ctx.fill();
+                ctx.restore();
+
+                ctx.save();
+                ctx.shadowColor = '#06b6d4';
+                ctx.shadowBlur = 12;
+                ctx.beginPath();
+                ctx.roundRect(rx, ry, rw, rh, cornerR);
+                ctx.setLineDash([10, 6]);
+                ctx.strokeStyle = '#06b6d4';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.restore();
+
+                const accentLen = 24;
+                ctx.strokeStyle = '#34d399';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                [[rx, ry], [rx + rw, ry], [rx, ry + rh], [rx + rw, ry + rh]].forEach(([x, y], i) => {
+                    const dx = (i % 2 === 0) ? 1 : -1;
+                    const dy = (i < 2) ? 1 : -1;
+                    ctx.beginPath();
+                    ctx.moveTo(x + dx * accentLen, y);
+                    ctx.lineTo(x, y);
+                    ctx.lineTo(x, y + dy * accentLen);
+                    ctx.stroke();
+                });
+
+                ctx.font = '14px Inter, sans-serif';
+                ctx.fillStyle = 'rgba(6,182,212,0.85)';
+                ctx.textAlign = 'center';
+                const labels = { eye: 'Position eye here', face: 'Position face here', nail: 'Position nail here' };
+                ctx.fillText(labels[currentModule] || 'Position here', cx, ry + rh + 22);
+
+                animFrameId = requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        async function capturePhoto() {
+            if (!cameraReady) {
+                showError('Camera is still loading. Please wait a moment.');
+                return;
+            }
+
+            const vw = cameraVideo.videoWidth, vh = cameraVideo.videoHeight;
+            if (!vw || !vh) {
+                showError('Camera feed not ready. Please wait and try again.');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const cx = vw * 0.5, cy = vh * 0.5;
+            const rw = vw * 0.60, rh = vh * 0.84;
+            const x = Math.round(cx - rw / 2), y = Math.round(cy - rh / 2);
+            const w = Math.round(rw), h = Math.round(rh);
+
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(cameraVideo, x, y, w, h, 0, 0, w, h);
+
+            const procCanvas = document.createElement('canvas');
+            procCanvas.width = w; procCanvas.height = h;
+            const procCtx = procCanvas.getContext('2d');
+            procCtx.filter = 'contrast(1.1) brightness(1.02) saturate(1.05)';
+            procCtx.drawImage(canvas, 0, 0);
+            procCtx.filter = 'none';
+
+            procCanvas.toBlob(async (blob) => {
+                if (!blob) { showError('Failed to capture image.'); return; }
+                capturedBlob = blob;
+                selectedFile = null;
+
+                stopCamera();
+                cameraContainer.style.display = 'none';
+
+                previewImage.src = URL.createObjectURL(blob);
+                captureBtn.style.display = 'none';
+                flipBtn.style.display = 'none';
+                retakeBtn.style.display = '';
+                resultCard.style.display = 'none';
+                errorBox.style.display = 'none';
+
+                await showScanAnimation(1500);
+                predictBtn.style.display = 'block';
+            }, 'image/jpeg', 0.95);
+        }
+
+        function retakePhoto() {
+            capturedBlob = null;
+            previewContainer.style.display = 'none';
+            predictBtn.style.display = 'none';
+            resultCard.style.display = 'none';
+            errorBox.style.display = 'none';
+            captureBtn.style.display = '';
+            retakeBtn.style.display = 'none';
+            flipBtn.style.display = '';
+
+            cameraContainer.style.display = 'block';
+            startCamera();
+        }
+
+        async function flipCamera() {
+            currentFacing = currentFacing === 'user' ? 'environment' : 'user';
+            stopCamera();
+            await startCamera();
+        }
+
+        /* ─── Prediction ────────────────────────────────────────── */
+        async function runPrediction() {
+            const file = selectedFile || capturedBlob;
+            if (!file) { showError('No image selected.'); return; }
+
+            predictBtn.disabled = true;
+            predictBtn.textContent = '⏳ Analysing…';
+            scanOverlay.classList.add('active');
+            loadingState.style.display = 'block';
+            resultCard.style.display = 'none';
+            errorBox.style.display = 'none';
+
+            let msgIdx = 0;
+            loadingText.textContent = STATUS_MSGS[0];
+            const msgInterval = setInterval(() => {
+                msgIdx = (msgIdx + 1) % STATUS_MSGS.length;
+                loadingText.textContent = STATUS_MSGS[msgIdx];
+            }, 900);
+
+            const formData = new FormData();
+            formData.append('file', file, file.name || 'capture.jpg');
+            if (capturedBlob) formData.append('source', 'camera');
+
+            try {
+                const res = await fetch(ENDPOINTS[currentModule], { method: 'POST', body: formData });
+                const data = await res.json();
+                clearInterval(msgInterval);
+                scanOverlay.classList.remove('active');
+                loadingState.style.display = 'none';
+                predictBtn.disabled = false;
+                predictBtn.textContent = '🔍 Analyse Image';
+
+                if (!data.success) { showError(data.error || 'Prediction failed.'); return; }
+                renderResult(data);
+            } catch (err) {
+                clearInterval(msgInterval);
+                scanOverlay.classList.remove('active');
+                loadingState.style.display = 'none';
+                predictBtn.disabled = false;
+                predictBtn.textContent = '🔍 Analyse Image';
+                showError('Network error. Is the Flask server running on http://localhost:5000 ?');
+            }
+        }
+
+        /* ─── Render Result ─────────────────────────────────────── */
+        function renderResult(data) {
+            const prediction = data.prediction;
+            const isEyeModule = currentModule === 'eye';
+            const isHealthy = (isEyeModule && prediction === 'Normal') || prediction === 'Healthy';
+
+            let cardClass = 'result-card ';
+            if (isHealthy) {
+                cardClass += 'normal';
+            } else if (isEyeModule) {
+                cardClass += 'jaundice';
+            } else {
+                cardClass += 'disease';
+            }
+            resultCard.className = cardClass;
+            resultCard.style.display = 'block';
+
+            $('resultIcon').textContent = MODULE_ICONS[currentModule] || '🔍';
+
+            const statusEl = $('resultStatus');
+            if (isHealthy) {
+                statusEl.textContent = '✅ HEALTHY';
+            } else if (isEyeModule) {
+                statusEl.textContent = '⚠️ ATTENTION NEEDED';
+            } else {
+                statusEl.textContent = '⚠️ CONDITION DETECTED';
+            }
+
+            $('resultLabel').textContent = prediction;
+            $('resultLabel').style.color = isHealthy ? 'var(--green)' : 'var(--amber)';
+
+            $('resultConf').textContent = 'Confidence: ' + data.confidence + '%';
+
+            const fill = $('confFill');
+            fill.style.width = '0';
+            requestAnimationFrame(() => { fill.style.width = data.confidence + '%'; });
+
+            const dualContainer = $('dualBarContainer');
+
+            if (isEyeModule) {
+                const normalConf = isHealthy ? data.confidence : (100 - data.confidence);
+                const jaundiceConf = isHealthy ? (100 - data.confidence) : data.confidence;
+
+                dualContainer.style.display = '';
+                $('healthyBarValue').textContent = normalConf.toFixed(1) + '%';
+                requestAnimationFrame(() => { $('healthyBarFill').style.width = normalConf + '%'; });
+
+                $('diseaseBarLabel').innerHTML = '⚠️ Jaundice';
+                $('diseaseBarValue').textContent = jaundiceConf.toFixed(1) + '%';
+                requestAnimationFrame(() => { $('diseaseBarFill').style.width = jaundiceConf + '%'; });
+
+            } else if (data.healthy_score !== undefined) {
+                dualContainer.style.display = '';
+
+                if (isHealthy) {
+                    $('healthyBarValue').textContent = data.confidence + '%';
+                    requestAnimationFrame(() => { $('healthyBarFill').style.width = data.confidence + '%'; });
+
+                    const diseaseRemain = (100 - data.confidence).toFixed(1);
+                    $('diseaseBarLabel').innerHTML = '⚠️ Disease Risk';
+                    $('diseaseBarValue').textContent = diseaseRemain + '%';
+                    requestAnimationFrame(() => { $('diseaseBarFill').style.width = diseaseRemain + '%'; });
+                } else {
+                    $('healthyBarValue').textContent = data.healthy_score.toFixed(1) + '%';
+                    requestAnimationFrame(() => { $('healthyBarFill').style.width = data.healthy_score + '%'; });
+
+                    $('diseaseBarLabel').innerHTML = '⚠️ ' + prediction;
+                    $('diseaseBarValue').textContent = data.confidence + '%';
+                    requestAnimationFrame(() => { $('diseaseBarFill').style.width = data.confidence + '%'; });
+                }
+            } else {
+                dualContainer.style.display = 'none';
+            }
+
+            const rawEl = $('resultRaw');
+            if (data.raw_score !== undefined) {
+                rawEl.textContent = 'Raw model score: ' + data.raw_score;
+                rawEl.style.display = '';
+            } else rawEl.style.display = 'none';
+
+            const topEl = $('topPreds');
+            if (data.top_predictions && data.top_predictions.length) {
+                let html = '<h4>Top Predictions</h4>';
+                data.top_predictions.forEach((p, i) => {
+                    const barColor = (i === 0) ? 'linear-gradient(90deg, var(--primary), var(--accent))' : 'linear-gradient(90deg, #94a3b8, #cbd5e1)';
+                    html += '<div class="top-pred-item">'
+                        + '<span class="pred-rank">' + (i + 1) + '</span>'
+                        + '<span style="min-width:90px">' + p['class'] + '</span>'
+                        + '<span class="pred-bar"><div class="pred-bar-fill" style="width:' + p.confidence + '%;background:' + barColor + '"></div></span>'
+                        + '<span style="min-width:52px;text-align:right;font-weight:700;font-size:.85rem">' + p.confidence + '%</span>'
+                        + '</div>';
+                });
+                topEl.innerHTML = html;
+                topEl.style.display = '';
+            } else topEl.style.display = 'none';
+
+            const cropEl = $('eyeCropPreview');
+            if (data.eye_crop) {
+                $('eyeCropImg').src = 'data:image/jpeg;base64,' + data.eye_crop;
+                $('eyeCropLabel').textContent = 'Detected eye region (method: ' + data.detection + ')';
+                cropEl.style.display = '';
+            } else cropEl.style.display = 'none';
+
+            renderAISummary(data);
+
+            let existingBadge = resultCard.querySelector('.demo-badge');
+            if (existingBadge) existingBadge.remove();
+            if (data.demo_mode) {
+                const badge = document.createElement('div');
+                badge.className = 'demo-badge';
+                badge.style.margin = '12px 24px 16px';
+                badge.textContent = '⚠ DEMO MODE — No .h5 model loaded. Results are simulated.';
+                resultCard.appendChild(badge);
+            }
+
+            setTimeout(() => {
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 200);
+        }
+
+        /* ─── AI Summary ────────────────────────────────────────── */
+        let lastReportData = null;
+
+        function renderAISummary(data) {
+            const summary = $('aiSummary');
+            const info = data.disease_info;
+
+            if (!info || !info.description) {
+                summary.style.display = 'none';
+                return;
+            }
+
+            lastReportData = data;
+            summary.style.display = '';
+            $('aiDescription').textContent = info.description;
+
+            const sevContainer = $('aiSeverityContainer');
+            if (info.severity) {
+                const sevLabels = { healthy: '\u2705 Healthy \u2014 No Concern', mild: '\ud83d\udfe1 Mild \u2014 Monitor', moderate: '\ud83d\udfe0 Moderate \u2014 Consult Doctor', high: '\ud83d\udd34 High Severity \u2014 Urgent' };
+                sevContainer.innerHTML = '<span class="severity-badge ' + info.severity + '">' + (sevLabels[info.severity] || info.severity) + '</span>';
+            } else {
+                sevContainer.innerHTML = '';
+            }
+        }
+
+        function openReportModal() {
+            if (!lastReportData) return;
+            const data = lastReportData;
+            const info = data.disease_info;
+            const prediction = data.prediction;
+            const isEyeModule = currentModule === 'eye';
+            const isHealthy = (isEyeModule && prediction === 'Normal') || prediction === 'Healthy';
+            const bannerClass = isHealthy ? 'healthy' : 'disease';
+            const bannerIcon = isHealthy ? '\u2705' : '\u26a0\ufe0f';
+
+            let html = '';
+
+            // Prediction Banner
+            html += '<div class="report-prediction-banner ' + bannerClass + '">';
+            html += '  <div class="report-pred-icon">' + bannerIcon + '</div>';
+            html += '  <div>';
+            html += '    <div class="report-pred-name">' + prediction + '</div>';
+            html += '    <div class="report-pred-conf">Confidence: ' + data.confidence + '%</div>';
+            html += '  </div>';
+            html += '</div>';
+
+            // Description
+            if (info.description) {
+                html += '<div class="report-section">';
+                html += '  <div class="report-section-title">\ud83d\udcdd Overview</div>';
+                html += '  <div class="report-desc">' + info.description + '</div>';
+                html += '</div>';
+            }
+
+            // Detail Cards
+            if (info.causes) {
+                html += '<div class="report-detail-card causes">';
+                html += '  <div class="report-detail-label">\ud83d\udd2c Possible Causes</div>';
+                html += '  <div class="report-detail-text">' + info.causes + '</div>';
+                html += '</div>';
+            }
+
+            if (info.symptoms) {
+                html += '<div class="report-detail-card symptoms">';
+                html += '  <div class="report-detail-label">\ud83d\udccb Common Symptoms</div>';
+                html += '  <div class="report-detail-text">' + info.symptoms + '</div>';
+                html += '</div>';
+            }
+
+            if (info.recommendation) {
+                html += '<div class="report-detail-card recommendation">';
+                html += '  <div class="report-detail-label">\ud83d\udc8a Recommended Action</div>';
+                html += '  <div class="report-detail-text">' + info.recommendation + '</div>';
+                html += '</div>';
+            }
+
+            $('reportModalBody').innerHTML = html;
+            document.getElementById('reportModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReportModal(e) {
+            if (e && e.target !== document.getElementById('reportModalOverlay')) return;
+            document.getElementById('reportModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeReportModal();
+        });
+
+        /* ─── Error ─────────────────────────────────────────────── */
+        function showError(msg) {
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
